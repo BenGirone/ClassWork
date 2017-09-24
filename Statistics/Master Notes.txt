@@ -1,0 +1,48 @@
+//----------9/4/17----------//
+
+R:
+    -str()
+        -stands for structure
+        -prints some data to console
+        
+    -?
+        -gives help info
+        
+    -view()
+        -shows a table of data
+        
+    -extracting vars
+        -dataFrame$variable
+        -dataFrame[, "variable"]
+        -dataFrame[, 1]
+        
+        var <- dataFrame$variable.part
+        
+    -tabulating data
+        -table()
+            -preliminary step in most analysis
+    
+    -histograms
+!       -know how to do one by hand
+        -hist()
+        -hist(dataFrame$variable, breaks=2:10)
+        
+    -seq(from, to, step)
+        
+//----------9/6/17----------//
+
+R:
+    -var(x) is the variance
+    -sd(x) is the standard deviation
+    
+    -quantile(vector, 0.x)
+
+//----------9/8/17----------//
+
+R:
+    -ctrl+l
+        -clears console
+        
+    -boxplot()
+    
+//----------9/20/17----------//

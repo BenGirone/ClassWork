@@ -1,0 +1,28 @@
+|----------8/31/17----------|
+
+Cache
+    -L1(fast), L2, L3(slower)
+
+Mapping Function
+    -Determines which cache location the memory block will occupy.
+    -Uses the "Least recently used" algrorithm,
+    
+Operating System
+    -A program that controlls the execution of application programs
+    -An interface between applications and hardware
+    
+    -Programs broken down from:
+        -API (Read This File)
+        -ABI (Instructions)
+        -ISA
+        
+    -Evolve over time
+        -Hardware upgrades
+        -New types of hardware
+        -New services
+        -Fixes
+        
+//----------9/5/17----------//
+
+Process:
+    -4 definitions

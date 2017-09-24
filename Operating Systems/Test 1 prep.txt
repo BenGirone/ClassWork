@@ -1,0 +1,16 @@
+Chapters 1-5
+
+Chapter 1:
+
+Chapter 2:
+    -Definition of OS
+    -Key intefaces
+        -ISA, ABI, API
+    -Monitor OS
+        -Part of a batch system
+        -written in JCL(Job control interface
+        -runs in kernel mode(programs run in user mode)
+    -Multiprogramming
+        -multitasking
+        -central theme of modern OS
+    -33
