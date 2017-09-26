@@ -26,3 +26,45 @@ Operating System
 
 Process:
     -4 definitions
+    
+//---------9/26/17---------//
+-know the terms
+-know the review questions
+-skim the problems
+
+-memory hierarchy
+    -(hit ration * cache acess) + (1 - hit ratio) * (main memory acess)
+    
+-cache is transparent to the os
+
+-operating system main goals
+    -managing resources
+    -protection
+    -accessing hardware
+    
+-four things an instruttion can do
+    -read
+    -write
+    -?
+    -?
+    
+-Dont worry to much about specific operating systems
+
+-three ways to do memory i/o
+    -processor i/o
+    -interrupts
+    -direct memory access
+    
+    -advantages
+    -disadvantages
+    
+-trap is a reaction to an error
+
+-what is a semaphore? what are its two operations?
+    -allows ou to control critical errors and mutual exclusion
+        -best if done atomically
+                
+-critical area/region
+    -a portion of memory or resource that can only be accessed by one process at a time
+    
+-Processes have access to things. threads do not.
