@@ -5,24 +5,62 @@ Naturalism(derived from Verism) -> Old Roman bust
 //----------9/6/17----------//
 
 PP1:
+    -arhaic 700-500 BC
+    -Classical 440 BC
+    -Late Classical 300-150 BC
+    -classical antiquity 1st century AD
+    -late antiquity 4th century
+    -byzantine era
+    
+    -7
+        -Kouros = young greek athlete
+            -greeks prized youth
+    
+    -11
+        -Doryphorous (speer carrier)
+            -Known as the canon of Polykleitos
+            -An example of contraposto (weight on one leg)
+            
+    -13
+        -Vitruvius: Beauty consists “in the proportion, not of the elements, but of the parts… as set forth in the Canon of Polyclitus, the sculptor of the original image. 
+
+    -14
+        -takes contraposto to the next level
+        
+    -15
+        -Laocoon
+            -an example of serpentinato figura
+            -an example of hierarchichal figuration
+                -important people are bigger
+    
     -16
         -Different perspective
             -Honoring the Enenmy
     
+    -17
+        -Firmitas = solid
+        -Utilitas = useful
+        -Venustas = beautiful
+        
+    -18
+        -vertruvius inspired da vinci to make the virtruvian man
     
     -22
         -Both natural and ideal
-        
-    -Firmitas = solid
-    -Utilitas = useful
-    -Venustas = beautiful
     
     -25
         -the ornamental nature sculptures are ordered and organized. not like in nature.
         -Meanders are the swastica looking things.
+        -pilasters are useless decorative columns.
+        -frieze is a narrative relief sculpture
+        -relief sculptures are 2.5 dimensional
+        
+    -29
+        -a painted schulpture is called polychromed
     
     -38
         -an example of trampoloei
+            -A type of painting which, through various naturalistic devices, creates the illusion that the objects depicted are actually there in front of us. Dating from classical times, tromp l'oeil was revived in the 15th century and became a distinctive feature of 17th-century Dutch painting.
     
 
 PP2:
@@ -75,6 +113,7 @@ PP3:
         -Junius Bassus
         -Contains a great deal of typology
             -reverberation of an idea.
+            -A system of classification. In Christian thought, the drawing of parallels between the Old Testament and the New. Typological studies were based on the assumption that Old Testament figures and events prefigured those in the New, e.g. the story of Jonah and the whale prefigured Christ's death and resurrection. Such typological links were frequently used in both medieval and Renaissance art.
         
     -27
         -traditio legus
@@ -89,10 +128,14 @@ PP3:
             -Clearstory
                 -upper row of windows
             -Pendentive
-                -triangular support area under the dome
+                -inverted triangular support area under the dome
                 
         -36:
             -San Vitale
+        
+        -42
+            -scriptorium
+                -where monks would copy texts and add make illuminated manuscripts
         
         -39:
             -Typology
@@ -134,7 +177,7 @@ PP3:
         -12
             -all holy places have
                 -vestibule (entry)
-                -Central area
+                -Central area (holy place)
                 -Holy of holies location
         
         -15
@@ -153,9 +196,9 @@ PP3:
             -entrance is a recessed portal
             -Trumeau (the column in the middle)
         -19
-            -tympanum (the whole structure)
+            -tympanum (main relief)
             -archivolts (rings)
-            -lintel (image)
+            -lintel (beam)
             
         -20
             -clerestory (row of windows)
@@ -176,3 +219,33 @@ PP3:
                 
             -the scenes are stacked on top of each other
                 -each one is called a registers
+                
+//---------10/4/17----------//
+    PP5:
+        -4
+            -A graphical representation of a church
+            
+        -5
+            -where most of the brick for the churches came from
+            
+        -14
+            -Jamb sculpture very important to gothic.
+                -Carved statues of religious figures usually found on and around the portals of a Romanesque or Gothic church.
+            
+        -25
+            -chimera(left)
+            -gargoyle(right)
+        -39
+            -Anagogy
+                -literal meaning + spiritual meaning
+        
+        -50
+            -the pointy windows at below the rose window are called lancets
+            
+        -51
+            -example of a lancet
+            
+        -finished  
+        
+//---------10/11/17----------//
+        
