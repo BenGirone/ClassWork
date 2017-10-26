@@ -76,7 +76,7 @@ public class BMAGHungarianAddress implements IAddress {
 		System.out.print(streetName + "   " + streetNumber);
 		
 		//check if the user specified apartment info for the address
-		if (!(apartmentFloor.contains("null")))
+		if (!(apartmentFloor.contains("null")) && apartmentFloor != "")
 			System.out.println("   " + apartmentFloor + "  u" + apartmentNumber); //output address the third line
 		else
 			System.out.println(""); //end the third line

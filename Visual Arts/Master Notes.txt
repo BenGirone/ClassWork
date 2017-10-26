@@ -247,5 +247,41 @@ PP3:
             
         -finished  
         
-//---------10/11/17----------//
+//---------10/18/17----------//
+
+    PP7:
+        -5
+            -MAESTA
         
+        -15
+            -Grisaille
+                -french "in the manner of greynesss"
+                -monochromatic
+                
+-buon fresco (good fresco, in the plaster)
+-secco fresco (dry fresco, on the plaster)
+
+//-----------10/25/17----------//
+    PP8:
+        -3
+            -system
+            -perspective
+            -an example of diminution
+            -convergence of parallel lines
+            
+        -10
+            -continuous narrative
+                -peter appears 3 times
+            -atmospheric perspective
+                -people in the foreground are painted clearly
+                -people in the background are more hazy
+                
+        -11
+            -chiaroscuro
+                -showing definition through light
+                
+        -13
+            -gods collar is the holy spirit
+            
+        -22
+            -foreshortinening but not diminution

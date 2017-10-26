@@ -38,6 +38,9 @@ public class BMAGAmericanAddress implements IAddress {
 	
 	@Override
 	public void inputAddress() {
+		//prompt for and receive input for the address' first name
+		System.out.println("Enter a title:");
+		editTitle();
 		
 		//prompt for and receive input for the address' first name
 		System.out.println("Enter a first name:");
@@ -71,7 +74,7 @@ public class BMAGAmericanAddress implements IAddress {
 		editCity();
 		
 		//prompt for and receive input for the address' zip code
-		System.out.println("Enter a zip digit code:");
+		System.out.println("Enter a zip code:");
 		editFourDigitCode();
 		
 	}
@@ -82,7 +85,7 @@ public class BMAGAmericanAddress implements IAddress {
 		System.out.println(hAddress.getTitle() + " " + hAddress.getFirstName() + " " + hAddress.getLastName());
 		
 		//check if the user specified apartment info for the address
-		if (!(hAddress.getApartmentFloor().contains("null")))
+		if (!(hAddress.getApartmentFloor().contains("null")) && hAddress.getApartmentFloor() != "")
 			//out put the apartment info
 			System.out.println("FL " + hAddress.getApartmentFloor() + " APT " + hAddress.getApartmentNumber());
 		
