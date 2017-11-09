@@ -285,3 +285,29 @@ PP3:
             
         -22
             -foreshortinening but not diminution
+            
+//----------11/8/17----------//
+    PP8:
+        -perspective is a system of creatiing space through illusion
+            -composed of
+                -horizon line
+                -vanishing point
+                -diminution
+                -foreshortinening
+        
+        -25
+            -dramatic
+            -example of chiaroscuro and contrast
+            
+        -34
+            -tufa
+                =light organic stone
+                
+        -the golden ratio
+            -phi  a/b = 1.618...
+            - (a + b) is to (a) as (a) is to (b).
+            -used to create golden rectangle and spiral
+            
+    PP9:
+        -Sfumato (smoke) is the technique
+            -similar to atmospheric perspective
