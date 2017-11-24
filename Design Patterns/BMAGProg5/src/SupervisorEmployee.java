@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class SupervisorEmployee implements IEmployee
 {	
@@ -11,6 +12,11 @@ public class SupervisorEmployee implements IEmployee
 		employee = e;
 	}
 	
+	public ArrayList<IEmployee> getSubordinates()
+	{
+		return subordinates;
+	}
+
 	@Override
 	public String GetName()
 	{
@@ -50,8 +56,7 @@ public class SupervisorEmployee implements IEmployee
 	@Override
 	public double CalculateWeeklyPay()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return employee.CalculateWeeklyPay();
 	}
 
 	public void AddSubordinate(IEmployee employee)
@@ -59,8 +64,33 @@ public class SupervisorEmployee implements IEmployee
 		subordinates.add(employee);
 	}
 	
-	public void RemoveSubordinate()
+	public void RemoveSubordinate(IEmployee employee)
 	{
-		//ToDo Figure this out.
+		if (subordinates.contains(employee))
+			subordinates.remove(employee);
+	}
+
+	@Override
+	public void display()
+	{
+		employee.display();
+		
+		for (Iterator<IEmployee> iterator = subordinates.iterator(); iterator.hasNext();)
+		{
+			System.out.print("    ");
+			iterator.next().display();
+		}
+	}
+
+	@Override
+	public void displayCustomIterator()
+	{
+		employee.displayCustomIterator();
+		
+		for (EmployeeIterator iterator = new EmployeeIterator(this); iterator.hasNext();)
+		{
+			System.out.print("    ");
+			iterator.next().displayCustomIterator();
+		}
 	}
 }

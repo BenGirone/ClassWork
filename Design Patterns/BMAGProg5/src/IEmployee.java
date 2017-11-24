@@ -14,4 +14,8 @@ public interface IEmployee
 	public void SetPay(double pay);
 	
 	public double CalculateWeeklyPay();
+	
+	public void display();
+	
+	public void displayCustomIterator();
 }

@@ -1,62 +1,23 @@
 
-public class CommissionEmployee implements IEmployee
+public class CommissionEmployee extends BaseEmployee
 {
-	
-	private String name;
-	
-	private String title;
-	
-	private double pay;
-	
 	private double sales;
 	
 	public CommissionEmployee(String name, String title, double pay, double sales)
 	{
-		this.name = name;
-		this.title = title;
-		this.pay = pay;
+		super(name, title, pay);
+		this.sales = sales;
 	}
 	
-	@Override
-	public String GetName()
-	{
-		return name;
-	}
-
-	@Override
-	public void SetName(String name)
-	{
-		this.name = name;
-	}
-
-	@Override
-	public String GetTitle()
-	{
-		return title;
-	}
-
-	@Override
-	public void SetTitle(String title)
-	{
-		this.title = title;
-	}
-
-	@Override
-	public double GetPay()
-	{
-		return pay;
-	}
-
-	@Override
-	public void SetPay(double pay)
-	{
-		this.pay = pay;
-	}
-
 	@Override
 	public double CalculateWeeklyPay()
 	{
 		return (pay/100) * sales;
 	}
 
+	@Override
+	public void display()
+	{
+		System.out.println(name + " : " + title + "; Sales: " + sales + ", Commission: " + pay);
+	}
 }

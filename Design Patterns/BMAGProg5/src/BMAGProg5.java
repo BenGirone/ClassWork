@@ -1,4 +1,3 @@
-
 public class BMAGProg5
 {
 	public static void main(String[] args)
@@ -18,8 +17,8 @@ public class BMAGProg5
 		HourlyEmployee henryHelper = new HourlyEmployee("Henry Helper", "Floor Worker", 9, 40);
 		HourlyEmployee littleBilly = new HourlyEmployee("Little Billy", "Floor Worker", 5, 20);
 		
-		CommissionEmployee imaCheater = new CommissionEmployee(" Ima Cheeter", "SalesPerson", 2, 20000);
-		CommissionEmployee stanfordNuthin = new CommissionEmployee("Ima Cheeter", "SalesPerson", 4, 10000);
+		CommissionEmployee imaCheater = new CommissionEmployee("Ima Cheeter", "SalesPerson", 2, 20000);
+		CommissionEmployee stanfordNuthin = new CommissionEmployee("Stanford Nuthin", "SalesPerson", 4, 10000);
 		
 		janeJanet.AddSubordinate(helgaHelper);
 		janeJanet.AddSubordinate(henryHelper);
@@ -41,6 +40,8 @@ public class BMAGProg5
 		billSmith.AddSubordinate(andrewNagy);
 		billSmith.AddSubordinate(bettyBill);
 		
-		System.out.println("done");
+		billSmith.display();
+		System.out.println("\n");
+		billSmith.displayCustomIterator();
 	}
 }

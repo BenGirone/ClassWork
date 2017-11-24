@@ -1,56 +1,11 @@
-
-public class HourlyEmployee implements IEmployee
+class HourlyEmployee extends BaseEmployee
 {
-	
-	private String name;
-	
-	private String title;
-	
-	private double pay;
-	
 	private double hours;
 	
 	public HourlyEmployee(String name, String title, double pay, double hours)
 	{
-		this.name = name;
-		this.title = title;
-		this.pay = pay;
-	}
-	
-	@Override
-	public String GetName()
-	{
-		return name;
-	}
-
-	@Override
-	public void SetName(String name)
-	{
-		this.name = name;
-	}
-
-	@Override
-	public String GetTitle()
-	{
-		return title;
-	}
-
-	@Override
-	public void SetTitle(String title)
-	{
-		this.title = title;
-	}
-
-	@Override
-	public double GetPay()
-	{
-		return pay;
-	}
-
-	@Override
-	public void SetPay(double pay)
-	{
-		this.pay = pay;
+		super(name, title, pay);
+		this.hours = hours;
 	}
 
 	@Override
@@ -59,4 +14,10 @@ public class HourlyEmployee implements IEmployee
 		return hours * pay;
 	}
 
+	@Override
+	public void display()
+	{
+		System.out.println(name + " : " + title + "; Hours: " + hours + ", Rate: " + pay);
+	}
+	
 }
