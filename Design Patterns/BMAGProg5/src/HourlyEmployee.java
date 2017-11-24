@@ -8,6 +8,16 @@ class HourlyEmployee extends BaseEmployee
 		this.hours = hours;
 	}
 
+	public double getHours()
+	{
+		return hours;
+	}
+
+	public void setHours(double hours)
+	{
+		this.hours = hours;
+	}
+
 	@Override
 	public double CalculateWeeklyPay()
 	{

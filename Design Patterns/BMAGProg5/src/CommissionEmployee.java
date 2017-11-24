@@ -9,6 +9,16 @@ public class CommissionEmployee extends BaseEmployee
 		this.sales = sales;
 	}
 	
+	public double getSales()
+	{
+		return sales;
+	}
+
+	public void setSales(double sales)
+	{
+		this.sales = sales;
+	}
+
 	@Override
 	public double CalculateWeeklyPay()
 	{
