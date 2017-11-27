@@ -1,8 +1,8 @@
-class HourlyEmployee extends BaseEmployee
+class BMGHourlyEmployee extends BMGBaseEmployee
 {
 	private double hours;
 	
-	public HourlyEmployee(String name, String title, double pay, double hours)
+	public BMGHourlyEmployee(String name, String title, double pay, double hours)
 	{
 		super(name, title, pay);
 		this.hours = hours;
@@ -19,7 +19,7 @@ class HourlyEmployee extends BaseEmployee
 	}
 
 	@Override
-	public double CalculateWeeklyPay()
+	public double calculateWeeklyPay()
 	{
 		return hours * pay;
 	}
@@ -29,5 +29,10 @@ class HourlyEmployee extends BaseEmployee
 	{
 		System.out.println(name + " : " + title + "; Hours: " + hours + ", Rate: " + pay);
 	}
-	
+
+	@Override
+	public double acceptSalaryVisitor(BMGEmployeeVisitor visitor)
+	{
+		return visitor.getTotalSalary(this);
+	}
 }

@@ -1,5 +1,5 @@
 
-public abstract class BaseEmployee implements IEmployee
+public abstract class BMGBaseEmployee implements BMGIEmployee
 {
 	protected String name;
 	
@@ -7,7 +7,7 @@ public abstract class BaseEmployee implements IEmployee
 	
 	protected double pay;
 	
-	public BaseEmployee(String name, String title, double pay)
+	public BMGBaseEmployee(String name, String title, double pay)
 	{
 		this.name = name;
 		this.title = title;
@@ -15,43 +15,43 @@ public abstract class BaseEmployee implements IEmployee
 	}
 
 	@Override
-	public String GetName()
+	public String getName()
 	{
 		return name;
 	}
 
 	@Override
-	public void SetName(String name)
+	public void setName(String name)
 	{
 		this.name = name;
 	}
 
 	@Override
-	public String GetTitle()
+	public String getTitle()
 	{
 		return title;
 	}
 
 	@Override
-	public void SetTitle(String title)
+	public void setTitle(String title)
 	{
 		this.title = title;
 	}
 
 	@Override
-	public double GetPay()
+	public double getPay()
 	{
 		return pay;
 	}
 
 	@Override
-	public void SetPay(double pay)
+	public void setPay(double pay)
 	{
 		this.pay = pay;
 	}
 
 	@Override
-	public abstract double CalculateWeeklyPay();
+	public abstract double calculateWeeklyPay();
 
 	@Override
 	public abstract void display();
@@ -61,5 +61,8 @@ public abstract class BaseEmployee implements IEmployee
 	{
 		display();
 	}
+	
+	@Override
+	public abstract double acceptSalaryVisitor(BMGEmployeeVisitor visitor);
 
 }

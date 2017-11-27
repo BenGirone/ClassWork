@@ -1,9 +1,9 @@
 
-public class CommissionEmployee extends BaseEmployee
+public class BMGCommissionEmployee extends BMGBaseEmployee
 {
 	private double sales;
 	
-	public CommissionEmployee(String name, String title, double pay, double sales)
+	public BMGCommissionEmployee(String name, String title, double pay, double sales)
 	{
 		super(name, title, pay);
 		this.sales = sales;
@@ -20,7 +20,7 @@ public class CommissionEmployee extends BaseEmployee
 	}
 
 	@Override
-	public double CalculateWeeklyPay()
+	public double calculateWeeklyPay()
 	{
 		return (pay/100) * sales;
 	}
@@ -29,5 +29,11 @@ public class CommissionEmployee extends BaseEmployee
 	public void display()
 	{
 		System.out.println(name + " : " + title + "; Sales: " + sales + ", Commission: " + pay);
+	}
+	
+	@Override
+	public double acceptSalaryVisitor(BMGEmployeeVisitor visitor)
+	{
+		return visitor.getTotalSalary(this);
 	}
 }
