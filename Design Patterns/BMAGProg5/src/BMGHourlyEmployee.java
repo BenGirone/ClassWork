@@ -17,13 +17,7 @@ class BMGHourlyEmployee extends BMGBaseEmployee
 	{
 		this.hours = hours;
 	}
-
-	@Override
-	public double calculateWeeklyPay()
-	{
-		return hours * pay;
-	}
-
+	
 	@Override
 	public void display()
 	{

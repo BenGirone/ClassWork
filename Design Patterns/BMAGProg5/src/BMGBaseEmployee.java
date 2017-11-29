@@ -51,9 +51,6 @@ public abstract class BMGBaseEmployee implements BMGIEmployee
 	}
 
 	@Override
-	public abstract double calculateWeeklyPay();
-
-	@Override
 	public abstract void display();
 
 	@Override

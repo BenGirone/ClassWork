@@ -13,8 +13,6 @@ public interface BMGIEmployee
 	
 	public void setPay(double pay);
 	
-	public double calculateWeeklyPay();
-	
 	public void display();
 	
 	public void displayCustomIterator();

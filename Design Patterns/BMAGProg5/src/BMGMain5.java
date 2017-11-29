@@ -42,8 +42,16 @@ public class BMGMain5
 		
 		billSmith.display();
 		System.out.println("\n");
-		billSmith.displayCustomIterator();
 		
-		billSmith.acceptSalaryVisitor(new BMGEmployeeVisitor());
+		billSmith.displayCustomIterator();
+		System.out.println("\n");
+		
+		billSmith.acceptNonSupervisorVisitor(new BMGEmployeeVisitor());
+		System.out.println("\n");
+		
+		billSmith.acceptSupervisorVisitor(new BMGEmployeeVisitor());
+		System.out.println("\n");
+		
+		billSmith.acceptSalesVisitor(new BMGEmployeeVisitor());
 	}
 }

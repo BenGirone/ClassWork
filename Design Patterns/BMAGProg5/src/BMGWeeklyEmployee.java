@@ -5,12 +5,6 @@ public class BMGWeeklyEmployee extends BMGBaseEmployee
 	{
 		super(name, title, pay);
 	}
-	
-	@Override
-	public double calculateWeeklyPay()
-	{
-		return pay;
-	}
 
 	@Override
 	public void display()

@@ -53,12 +53,6 @@ public class BMGSupervisorEmployee implements BMGIEmployee
 		employee.setPay(pay);
 	}
 
-	@Override
-	public double calculateWeeklyPay()
-	{
-		return employee.calculateWeeklyPay();
-	}
-
 	public void AddSubordinate(BMGIEmployee employee)
 	{
 		subordinates.add(employee);
@@ -97,14 +91,22 @@ public class BMGSupervisorEmployee implements BMGIEmployee
 	@Override
 	public double acceptSalaryVisitor(BMGEmployeeVisitor visitor)
 	{
-		if (employee instanceof BMGCommissionEmployee)
-			return visitor.getTotalSalary((BMGCommissionEmployee)employee);
-		
-		if (employee instanceof BMGHourlyEmployee)
-			return visitor.getTotalSalary((BMGHourlyEmployee)employee);
-		
-		return visitor.getTotalSalary((BMGWeeklyEmployee)employee);
+		return employee.acceptSalaryVisitor(visitor);
 	}
 	
+	public double acceptSupervisorVisitor(BMGEmployeeVisitor visitor)
+	{
+		return visitor.getSupervisorsSalary(this);
+	}
+	
+	public void acceptNonSupervisorVisitor(BMGEmployeeVisitor visitor)
+	{
+		visitor.getNonSupervisorsSalaries(this);
+	}
+	
+	public void acceptSalesVisitor(BMGEmployeeVisitor visitor)
+	{
+		visitor.getSalesResults(this);
+	}
 	
 }

@@ -18,13 +18,6 @@ public class BMGCommissionEmployee extends BMGBaseEmployee
 	{
 		this.sales = sales;
 	}
-
-	@Override
-	public double calculateWeeklyPay()
-	{
-		return (pay/100) * sales;
-	}
-
 	@Override
 	public void display()
 	{
