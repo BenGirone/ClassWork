@@ -1,6 +1,9 @@
+//Ben Girone CSC 352 11/29/17
+//This file contains a class to define employees that are paid a weekly salary.
 
 public class BMGWeeklyEmployee extends BMGBaseEmployee
 {	
+	//constructor
 	public BMGWeeklyEmployee(String name, String title, double pay)
 	{
 		super(name, title, pay);
@@ -13,7 +16,7 @@ public class BMGWeeklyEmployee extends BMGBaseEmployee
 	}
 	
 	@Override
-	public double acceptSalaryVisitor(BMGEmployeeVisitor visitor)
+	public double acceptSalaryVisitor(BMGSalaryVisitor visitor)
 	{
 		return visitor.getTotalSalary(this);
 	}

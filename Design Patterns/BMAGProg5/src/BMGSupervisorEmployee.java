@@ -1,17 +1,27 @@
-import java.util.ArrayList;
-import java.util.Iterator;
+//Ben Girone CSC 352 11/29/17
+//This file contains a class to define employees who supervise other employees.
+//Supervisors can have any pay type. This class wraps an employee of another pay type.
+
+import java.util.ArrayList; //ArrayList<BMGIEmployee>
+import java.util.Iterator; //Iterator<BMGIEmployee>
 
 public class BMGSupervisorEmployee implements BMGIEmployee
 {	
+	//data members
 	private BMGIEmployee employee;
 	
 	private ArrayList<BMGIEmployee> subordinates = new ArrayList<BMGIEmployee>();
 	
+	//constructor
 	public BMGSupervisorEmployee(BMGIEmployee e)
 	{
 		employee = e;
 	}
 	
+	/** getSubordinates
+	 * Returns a list of all employees that are subordinates of this employee.
+	 * @return subordinates
+	 */
 	public ArrayList<BMGIEmployee> getSubordinates()
 	{
 		return subordinates;
@@ -53,12 +63,12 @@ public class BMGSupervisorEmployee implements BMGIEmployee
 		employee.setPay(pay);
 	}
 
-	public void AddSubordinate(BMGIEmployee employee)
+	public void addSubordinate(BMGIEmployee employee)
 	{
 		subordinates.add(employee);
 	}
 	
-	public void RemoveSubordinate(BMGIEmployee employee)
+	public void removeSubordinate(BMGIEmployee employee)
 	{
 		if (subordinates.contains(employee))
 			subordinates.remove(employee);
@@ -67,11 +77,16 @@ public class BMGSupervisorEmployee implements BMGIEmployee
 	@Override
 	public void display()
 	{
+		//display the info on the employee wrapped by this object
 		employee.display();
 		
+		//iterate over the employee hierarchy
 		for (Iterator<BMGIEmployee> iterator = subordinates.iterator(); iterator.hasNext();)
 		{
+			//indent
 			System.out.print("    ");
+			
+			//display the next employee
 			iterator.next().display();
 		}
 	}
@@ -79,32 +94,37 @@ public class BMGSupervisorEmployee implements BMGIEmployee
 	@Override
 	public void displayCustomIterator()
 	{
+		//display the info on the employee wrapped by this object
 		employee.displayCustomIterator();
 		
+		//iterate over the employee hierarchy
 		for (BMGEmployeeIterator iterator = new BMGEmployeeIterator(this); iterator.hasNext();)
 		{
+			//indent
 			System.out.print("    ");
+			
+			//display the next employee
 			iterator.next().displayCustomIterator();
 		}
 	}
 	
 	@Override
-	public double acceptSalaryVisitor(BMGEmployeeVisitor visitor)
+	public double acceptSalaryVisitor(BMGSalaryVisitor visitor)
 	{
 		return employee.acceptSalaryVisitor(visitor);
 	}
 	
-	public double acceptSupervisorVisitor(BMGEmployeeVisitor visitor)
+	public double acceptSupervisorVisitor(BMGSupervisorSalaryVisitor visitor)
 	{
 		return visitor.getSupervisorsSalary(this);
 	}
 	
-	public void acceptNonSupervisorVisitor(BMGEmployeeVisitor visitor)
+	public void acceptNonSupervisorVisitor(BMGNonSupervisorSalaryVisitor visitor)
 	{
 		visitor.getNonSupervisorsSalaries(this);
 	}
 	
-	public void acceptSalesVisitor(BMGEmployeeVisitor visitor)
+	public void acceptSalesVisitor(BMGSalesResultVisitor visitor)
 	{
 		visitor.getSalesResults(this);
 	}
