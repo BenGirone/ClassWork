@@ -330,4 +330,19 @@ PP3:
         -4
             -polyptych
                 -a multi panel painting
+                
+//----------11/29/17----------//
+    -PP11:
+        -2
+            -Allegory
+        
+        -13
+            -this is not a rational way of seeing the world
+            
+        -14
+            -an example of a deesis
+            
+        -20
+            -figura serpentinata
+            
         
