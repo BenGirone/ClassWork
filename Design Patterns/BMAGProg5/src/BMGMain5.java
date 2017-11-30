@@ -78,5 +78,9 @@ public class BMGMain5
 		//display the sales results for all salesman working under Bill Smith
 		billSmith.acceptSalesVisitor(new BMGSalesResultVisitor());
 		
+		System.out.println("\n");
+		
+		billSmith.acceptDepartmentVisitor(new BMGDepartmentVisitor());
+		
 	} //end main function
 }

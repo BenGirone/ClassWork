@@ -129,4 +129,9 @@ public class BMGSupervisorEmployee implements BMGIEmployee
 		visitor.getSalesResults(this);
 	}
 	
+	public void acceptDepartmentVisitor(BMGDepartmentVisitor visitor)
+	{
+		visitor.displayDepartmentInfo(this);
+	}
+	
 }
