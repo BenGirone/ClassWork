@@ -1,6 +1,8 @@
+package package5;
 //Ben Girone CSC 352 11/29/17
 //This program uses the Composite pattern to create an employee hierarchy for a fictional company.
 //The Visitor and Iterator patterns are used to perform several operations on the hierarchy.
+//Both extra credit opportunities have been fulfilled.
 
 //NOTE: Documenting comments are written at the highest level definition of each member/function.
 
@@ -77,9 +79,9 @@ public class BMGMain5
 		
 		//display the sales results for all salesman working under Bill Smith
 		billSmith.acceptSalesVisitor(new BMGSalesResultVisitor());
-		
 		System.out.println("\n");
 		
+		//display the department info for the employees directly under Bill Smith
 		billSmith.acceptDepartmentVisitor(new BMGDepartmentVisitor());
 		
 	} //end main function

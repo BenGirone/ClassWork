@@ -1,3 +1,4 @@
+package package5;
 //Ben Girone CSC 352 11/29/17
 //This class defines a visitor that can calculate the weekly pay of any employee type.
 

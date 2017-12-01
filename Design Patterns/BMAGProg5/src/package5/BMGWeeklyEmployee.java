@@ -1,3 +1,4 @@
+package package5;
 //Ben Girone CSC 352 11/29/17
 //This file contains a class to define employees that are paid a weekly salary.
 

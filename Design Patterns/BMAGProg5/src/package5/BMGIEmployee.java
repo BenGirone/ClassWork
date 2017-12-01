@@ -1,5 +1,6 @@
+package package5;
 //Ben Girone CSC 352 11/29/17
-//This file defines an interface that every employee must conform to.getget
+//This file defines an interface that every employee must conform to.
 
 public interface BMGIEmployee
 {
@@ -15,7 +16,7 @@ public interface BMGIEmployee
 	 */
 	public void setName(String name);
 	
-	/**getTitle
+	/** getTitle
 	 * Gets the title of the employee.
 	 * @return A String representation of the employee title
 	 */
@@ -33,7 +34,7 @@ public interface BMGIEmployee
 	 */
 	public double getPay();
 	
-	/**setPay
+	/** setPay
 	 * Sets the pay of the employee
 	 * @param pay
 	 */
@@ -45,7 +46,7 @@ public interface BMGIEmployee
 	public void display();
 	
 	/** displayCustomIterator
-	 * Does the same as <code>display()</code>, but uses a custom iterator.
+	 * Does the same as {@link #display()}, but uses a custom iterator.
 	 */
 	public void displayCustomIterator();
 	

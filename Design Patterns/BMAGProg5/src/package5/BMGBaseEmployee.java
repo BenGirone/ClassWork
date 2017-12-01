@@ -1,3 +1,4 @@
+package package5;
 //Ben Girone CSC 352 11/29/17
 //This file contains a base employee abstract class.
 //The purpose of this class is to implement functionality that is shared across all employees.
@@ -6,9 +7,7 @@ public abstract class BMGBaseEmployee implements BMGIEmployee
 {
 	//data members
 	protected String name;
-	
 	protected String title;
-	
 	protected double pay;
 	
 	//constructor

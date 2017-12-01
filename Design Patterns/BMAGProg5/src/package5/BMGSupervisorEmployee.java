@@ -1,3 +1,4 @@
+package package5;
 //Ben Girone CSC 352 11/29/17
 //This file contains a class to define employees who supervise other employees.
 //Supervisors can have any pay type. This class wraps an employee of another pay type.
@@ -63,11 +64,20 @@ public class BMGSupervisorEmployee implements BMGIEmployee
 		employee.setPay(pay);
 	}
 
+	/** addSubordinate
+	 * Sets <strong>employee</strong> as a subordinate of this employee.
+	 * @param employee
+	 */
 	public void addSubordinate(BMGIEmployee employee)
 	{
 		subordinates.add(employee);
 	}
 	
+	/** removeSubordinate
+	 * Removes <strong>employee</strong> from the list of subordinates of this employee.
+	 * (If it exists)
+	 * @param employee
+	 */
 	public void removeSubordinate(BMGIEmployee employee)
 	{
 		if (subordinates.contains(employee))
@@ -114,23 +124,43 @@ public class BMGSupervisorEmployee implements BMGIEmployee
 		return employee.acceptSalaryVisitor(visitor);
 	}
 	
+	/** acceptSupervisorVisitor
+	 * Receive a supervisor visitor object and call its method
+	 * @param visitor
+	 */
 	public double acceptSupervisorVisitor(BMGSupervisorSalaryVisitor visitor)
 	{
+		//return visitor.getSupervisorsSalaryCustom(this); //uncomment this to use the custom iterator
 		return visitor.getSupervisorsSalary(this);
 	}
 	
+	/** acceptNonSupervisorVisitor
+	 * Receive a non-supervisor visitor object and call its method
+	 * @param visitor
+	 */
 	public void acceptNonSupervisorVisitor(BMGNonSupervisorSalaryVisitor visitor)
 	{
-		visitor.getNonSupervisorsSalaries(this);
+		visitor.getNonSupervisorsSalariesCustom(this); //uncomment this to use the custom iterator
+		//visitor.getNonSupervisorsSalaries(this);
 	}
 	
+	/** acceptSalesVisitor
+	 * Receive a sales visitor object and call its method
+	 * @param visitor
+	 */
 	public void acceptSalesVisitor(BMGSalesResultVisitor visitor)
 	{
+		//visitor.getSalesResultsCustom(this);  //uncomment this to use the custom iterator
 		visitor.getSalesResults(this);
 	}
 	
+	/** acceptDepartmentVisitor
+	 * Receive a department visitor object and call its method
+	 * @param visitor
+	 */
 	public void acceptDepartmentVisitor(BMGDepartmentVisitor visitor)
 	{
+		//visitor.displayDepartmentInfoCustom(this);  //uncomment this to use the custom iterator
 		visitor.displayDepartmentInfo(this);
 	}
 	

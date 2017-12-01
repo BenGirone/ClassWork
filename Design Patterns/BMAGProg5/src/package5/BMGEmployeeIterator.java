@@ -1,9 +1,10 @@
+package package5;
 //Ben Girone CSC 352 11/29/17
 //This file contains a class whose objects can traverse the hierarchy of employees.
 
 public class BMGEmployeeIterator
 {
-	//variable declaration
+	//data members
 	private BMGSupervisorEmployee employee;
 	private int index = 0;
 	
