@@ -1,4 +1,5 @@
 import java.util.concurrent.Semaphore;
+import java.util.PriorityQueue;
 
 class Clock 
 {
@@ -107,6 +108,7 @@ class Process extends Thread
 
 class Simulator 
 {
+	PriorityQueue<Process> processQueue;
 	Process[] processes;
 	
 	Simulator(Process[] processes)
@@ -116,34 +118,12 @@ class Simulator
 
 	public void runFCFS()
 	{
-		for (int i = 0; i < processes.length; i++)
-		{
-			processes[i].start();
-			
-			while (processes[i].isAlive());
-			
-			System.out.println("Process " + processes[i].getProcessName() + " ran for " + (double)processes[i].getCurrentTime()/1000.0 + " seconds");
-		}
+		
 	}
 	
 	public void runRR_q4()
 	{
-		Clock clock = new Clock();
-		for (int i = 0; i < processes.length; i++)
-		{
-			processes[i].start();
-			
-			while (true)
-			{
-				if (clock.getElapsedTime() < 1000)
-				{
-					clock = new Clock();
-					if (processes[i+1].getArrivalTime())
-				}
-				
-				
-			};
-		}
+		
 	}
 	
 	public void runFeedback_q1()
