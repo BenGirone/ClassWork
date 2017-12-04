@@ -3,11 +3,12 @@ package schedule;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class bmgFCFS extends bmgAlgorithm
+public class bmgRRq1 extends bmgAlgorithm
 {
 	private Queue<bmgProcess> readyQueue = new LinkedList<bmgProcess>();
-
-	public bmgFCFS(Queue<bmgProcess> processes)
+	private bmgTimeQuantum q = new bmgTimeQuantum(1);
+	
+	public bmgRRq1(Queue<bmgProcess> processes)
 	{
 		super(processes);
 	}
@@ -23,7 +24,16 @@ public class bmgFCFS extends bmgAlgorithm
 			{
 				if (!currentProcess.isFinished())
 				{
-					executeNextBurst();
+					if (q.shouldInterrupt())
+					{
+						currentProcess.printInfo();
+						getNextProcess();
+						executeNextBurst();
+					}
+					else
+					{
+						executeNextBurst();
+					}
 				}
 				else
 				{
@@ -52,22 +62,30 @@ public class bmgFCFS extends bmgAlgorithm
 			}
 		}
 	}
-	
+
 	@Override
 	protected void executeNextBurst()
 	{
 		currentProcess.burst(1);
 	}
-	
+
+	@Override
 	protected void getNextProcess()
 	{
 		if (!readyQueue.isEmpty())
 		{
+			if (currentProcess != null && !currentProcess.isFinished())
+			{
+				readyQueue.add(currentProcess);
+			}
+			
 			currentProcess = readyQueue.poll();
 		}
 		else
 		{
-			bmgSimulationTimer.getTimer().forward(1);
+			if (currentProcess == null || currentProcess.isFinished())
+				bmgSimulationTimer.getTimer().forward(1);
 		}
 	}
+
 }

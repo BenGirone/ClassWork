@@ -2,8 +2,6 @@ package schedule;
 
 public class bmgSimulator
 {
-	public bmgSimulationTimer timer = new bmgSimulationTimer();
-	
 	private bmgAlgorithm algorithm;
 	
 	private double averageTT;

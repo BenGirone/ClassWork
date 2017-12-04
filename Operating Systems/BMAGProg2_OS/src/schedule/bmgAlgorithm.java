@@ -4,9 +4,8 @@ import java.util.Queue;
 
 public abstract class bmgAlgorithm
 {
-	protected bmgSimulationTimer timer = new bmgSimulationTimer();
 	protected Queue<bmgProcess> processes;
-	protected bmgProcess currentProcess;
+	protected bmgProcess currentProcess = null;
 	
 	public bmgAlgorithm(Queue<bmgProcess> processes)
 	{
@@ -15,7 +14,9 @@ public abstract class bmgAlgorithm
 	
 	public abstract void run();
 	
-	public abstract void updateQueues();
+	protected abstract void updateQueues();
 	
-	public abstract void executeNextBurst();
+	protected abstract void executeNextBurst();
+	
+	protected abstract void getNextProcess();
 }

@@ -5,7 +5,7 @@ public class bmgProcess
 	private String processName;
 	private int arrivalTime;
 	private int serviceTime;
-	private int startTime;
+	private int startTime = -1;
 	private int priority;
 	private boolean finished = false;
 	private int finishTime;
@@ -46,6 +46,43 @@ public class bmgProcess
 				finished = true;
 				break;
 			}
+		}
+	}
+	
+	public bmgProcess getResetCopy()
+	{
+		return new bmgProcess(this.processName, this.arrivalTime, this.serviceTime);
+	}
+	
+	public void printInfo()
+	{
+		System.out.print("Process: " + processName);
+		
+		if (arrivalTime <= bmgSimulationTimer.getTimer().getValue())
+		{
+			System.out.print(" arrived at time: " + arrivalTime);
+			
+			if (startTime != -1)
+			{
+				System.out.print(" started at time: " + startTime);
+				System.out.print(" and has run for " + (serviceTime - remainingTime) + " time units.");
+				if (finished)
+				{
+					System.out.println(" The process exited at: " + finishTime);
+				}
+				else
+				{
+					System.out.println();
+				}
+			}
+			else
+			{
+				System.out.println(" and is ready to start.");
+			}
+		}
+		else
+		{
+			System.out.println(" has not arrived.");
 		}
 	}
 
