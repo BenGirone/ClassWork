@@ -5,9 +5,11 @@ import java.util.Queue;
 
 public class bmgRRq1 extends bmgAlgorithm
 {
+	//data members
 	private Queue<bmgProcess> readyQueue = new LinkedList<bmgProcess>();
 	private bmgTimeQuantum q = new bmgTimeQuantum(1);
 	
+	//constructor
 	public bmgRRq1(Queue<bmgProcess> processes)
 	{
 		super(processes);
@@ -16,48 +18,74 @@ public class bmgRRq1 extends bmgAlgorithm
 	@Override
 	public void run()
 	{
+		//scheduling loop
 		while (!processes.isEmpty() || !readyQueue.isEmpty() || !currentProcess.isFinished())
 		{
+			//check if new processes have arrived
 			updateQueues();
 			
+			//check if the current process is not null
 			if (currentProcess != null)
 			{
+				//check if the current process is still running
 				if (!currentProcess.isFinished())
 				{
+					//check if the clock should interrupt execution
 					if (q.shouldInterrupt())
 					{
+						//output process info
 						currentProcess.printInfo();
+						
+						//change the current process to the next process in the ready queue
 						getNextProcess();
+						
+						//continue to execute the process
 						executeNextBurst();
 					}
-					else
+					else //no interrupt needed
 					{
+						//continue to execute the process
 						executeNextBurst();
 					}
 				}
-				else
+				else //current process is finished
 				{
+					//output process info
 					currentProcess.printInfo();
+					
+					//reset the interrupt clock if necessary
+					q.reset();
+					
+					//change the current process to the next process in the ready queue
 					getNextProcess();
 				}
 			}
-			else
+			else //current process is null
 			{
+				//change the current process to the next process in the ready queue
 				getNextProcess();
 			}
 		}
-		
+		//output process info
 		currentProcess.printInfo();
+
+		//reset the simulation clock
+		bmgSimulationTimer.getTimer().reset();
 	}
 
 	@Override
 	protected void updateQueues()
 	{
+		//check if there are any more processes in the process queue
 		if (!processes.isEmpty())
 		{
+			//check if the next process in the process queue has arrived
 			if (processes.peek().getArrivalTime() <= bmgSimulationTimer.getTimer().getValue())
 			{
+				//output the info of the next process in the process queue
 				processes.peek().printInfo();
+				
+				//move the next process in the process queue to the ready queue
 				readyQueue.add(processes.poll()); 
 			}
 		}
@@ -66,26 +94,32 @@ public class bmgRRq1 extends bmgAlgorithm
 	@Override
 	protected void executeNextBurst()
 	{
+		//execute the current process for 1 time unit
 		currentProcess.burst(1);
 	}
 
 	@Override
 	protected void getNextProcess()
 	{
+		//check if the ready queue has any processes
 		if (!readyQueue.isEmpty())
 		{
+			//check if the currentProcess should be reinserted into the ready queue
 			if (currentProcess != null && !currentProcess.isFinished())
 			{
+				//reinsert the the current process into the ready queue
+				currentProcess.incrmentTimesPreempted();
 				readyQueue.add(currentProcess);
 			}
-			
+
+			//set the current process to the next process in the ready queue
 			currentProcess = readyQueue.poll();
 		}
-		else
+		else //ready queue is empty
 		{
+			//move the timer forward if no process is running
 			if (currentProcess == null || currentProcess.isFinished())
 				bmgSimulationTimer.getTimer().forward(1);
 		}
 	}
-
 }

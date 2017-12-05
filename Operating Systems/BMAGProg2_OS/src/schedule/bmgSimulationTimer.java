@@ -16,10 +16,18 @@ public class bmgSimulationTimer
 		value += time;
 	}
 	
-	public static bmgSimulationTimer getTimer() {
-	      if(instance == null) {
-	         instance = new bmgSimulationTimer();
-	      }
-	      return instance;
-	   }
+	public static bmgSimulationTimer getTimer() 
+	{
+		if(instance == null) 
+		{
+			instance = new bmgSimulationTimer();
+		}
+		
+		return instance;
+	}
+	
+	public void reset()
+	{
+		value = 0;
+	}
 }

@@ -13,6 +13,17 @@ public class bmgTimeQuantum
 	
 	public boolean shouldInterrupt()
 	{
-		return ((lastInterrupt + interval) <= bmgSimulationTimer.getTimer().getValue());
+		if ((lastInterrupt + interval) <= bmgSimulationTimer.getTimer().getValue())
+		{
+			reset();
+			return true;
+		}
+		
+		return false;
+	}
+
+	public void reset()
+	{
+		lastInterrupt = bmgSimulationTimer.getTimer().getValue();
 	}
 }

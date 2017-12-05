@@ -39,8 +39,19 @@ public class bmgMain
 		bmgSimulator FBq1 = new bmgSimulator(new bmgFBq1(processes.getResetCopy()));
 		bmgSimulator FBq2i = new bmgSimulator(new bmgFBq2i(processes.getResetCopy()));
 		
-		//FCFS.start();
-		RRq1.start();
+//		FCFS.start();
+//		System.out.println("--------------------------------");
+//		RRq1.start();
+//		System.out.println("--------------------------------");
+//		RRq4.start();
+//		System.out.println("--------------------------------");
+//		SPN.start();
+//		System.out.println("--------------------------------");
+//		SRT.start();
+//		System.out.println("--------------------------------");
+//		HRRN.start();
+//		System.out.println("--------------------------------");
+		FBq1.start();
 	}
 
 }

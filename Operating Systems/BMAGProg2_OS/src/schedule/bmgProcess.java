@@ -10,6 +10,7 @@ public class bmgProcess
 	private boolean finished = false;
 	private int finishTime;
 	private int remainingTime;
+	private int timesPreempted = 0;
 	
 	public bmgProcess(String processName, int arrivalTime, int serviceTime)
 	{
@@ -144,5 +145,15 @@ public class bmgProcess
 	public void setRemainingTime(int remainingTime)
 	{
 		this.remainingTime = remainingTime;
+	}
+	
+	public int getTimesPreempted()
+	{
+		return timesPreempted;
+	}
+	
+	public void incrmentTimesPreempted()
+	{
+		timesPreempted++;
 	}
 }
