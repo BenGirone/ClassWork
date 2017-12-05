@@ -18,6 +18,8 @@ public class bmgHRRN extends bmgAlgorithm
 	@Override
 	public void run()
 	{
+		System.out.print("HRRN: ");
+		
 		//scheduling loop
 		while (!processes.isEmpty() || !readyQueue.isEmpty() || !currentProcess.isFinished())
 		{
@@ -35,8 +37,6 @@ public class bmgHRRN extends bmgAlgorithm
 				}
 				else //current process is finished
 				{
-					//output process info
-					currentProcess.printInfo();
 					
 					//change the current process to the next process in the ready queue
 					getNextProcess();
@@ -49,11 +49,10 @@ public class bmgHRRN extends bmgAlgorithm
 			}
 		}
 		
-		//output info of the final process
-		currentProcess.printInfo();
-		
 		//reset the simulation clock
 		bmgSimulationTimer.getTimer().reset();
+		isDone = true;
+		System.out.println();
 	}
 
 	@Override
@@ -64,10 +63,7 @@ public class bmgHRRN extends bmgAlgorithm
 		{
 			//check if the next process in the process queue has reached its arrival time
 			if (processes.peek().getArrivalTime() <= bmgSimulationTimer.getTimer().getValue())
-			{
-				//print the info of the next process in the process queue
-				processes.peek().printInfo();
-				
+			{	
 				//move the next process in the process queue to the ready queue
 				readyQueue.add(processes.poll()); 
 			}
@@ -78,6 +74,7 @@ public class bmgHRRN extends bmgAlgorithm
 	protected void executeNextBurst()
 	{
 		//execute the current process for 1 time unit
+		System.out.print(currentProcess.getProcessName() + " ");
 		currentProcess.burst(1);
 	}
 	

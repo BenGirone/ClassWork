@@ -1,16 +1,11 @@
 package schedule;
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class bmgFBq1 extends bmgAlgorithm
 {
-	//queue of ready processes (time executing prioritized)
-	private PriorityQueue<bmgProcess> readyQueue = new PriorityQueue<bmgProcess>(new ProcessComparator_FB());
 	
+	bmgMultiQueue readyQueue = new bmgMultiQueue(4);
 	private bmgTimeQuantum q = new bmgTimeQuantum(1);
 	
 	//constructor
@@ -22,6 +17,8 @@ public class bmgFBq1 extends bmgAlgorithm
 	@Override
 	public void run()
 	{
+		System.out.print("FBq1: ");
+		
 		//scheduling loop
 		while (!processes.isEmpty() || !readyQueue.isEmpty() || !currentProcess.isFinished())
 		{
@@ -38,7 +35,7 @@ public class bmgFBq1 extends bmgAlgorithm
 					if (q.shouldInterrupt())
 					{
 						//output process info
-						currentProcess.printInfo();
+						//currentProcess.printInfo();
 						
 						//change the current process to the next process in the ready queue
 						getNextProcess();
@@ -55,7 +52,7 @@ public class bmgFBq1 extends bmgAlgorithm
 				else //current process is finished
 				{
 					//output process info
-					currentProcess.printInfo();
+					//currentProcess.printInfo();
 					
 					//reset the interrupt clock if necessary
 					q.reset();
@@ -71,10 +68,12 @@ public class bmgFBq1 extends bmgAlgorithm
 			}
 		}
 		//output process info
-		currentProcess.printInfo();
+		//currentProcess.printInfo();
 
 		//reset the simulation clock
 		bmgSimulationTimer.getTimer().reset();
+		isDone = true;
+		System.out.println();
 	}
 
 	@Override
@@ -93,21 +92,13 @@ public class bmgFBq1 extends bmgAlgorithm
 				readyQueue.add(processes.poll()); 
 			}
 		}
-		
-		if (currentProcess != null) {System.out.print(currentProcess.getProcessName() + " ");};
-		for (Iterator<bmgProcess> iterator = readyQueue.iterator(); iterator.hasNext();)
-		{
-			bmgProcess process =iterator.next();
-			
-			System.out.print(process.getProcessName() + " ");
-		}
-		System.out.println();
 	}
 
 	@Override
 	protected void executeNextBurst()
 	{
 		//execute the current process for 1 time unit
+		System.out.print(currentProcess.getProcessName() + " ");
 		currentProcess.burst(1);
 	}
 
@@ -120,19 +111,15 @@ public class bmgFBq1 extends bmgAlgorithm
 			//check if the currentProcess should be reinserted into the ready queue
 			if (currentProcess != null && !currentProcess.isFinished())
 			{
-				if(currentProcess.getTimesPreempted() >= readyQueue.peek().getTimesPreempted())
-				{
 					//reinsert the the current process into the ready queue
 					currentProcess.incrmentTimesPreempted();
-					readyQueue.add(currentProcess);
-					currentProcess = readyQueue.poll();
-				}
+					readyQueue.reinsert(currentProcess);
+					
+					System.out.print("| ");
 			}
-			else
-			{
-				//set the current process to the next process in the ready queue
-				currentProcess = readyQueue.poll();
-			}
+			
+			//set the current process to the next process in the ready queue
+			currentProcess = readyQueue.poll();
 		}
 		else //ready queue is empty
 		{
@@ -140,24 +127,5 @@ public class bmgFBq1 extends bmgAlgorithm
 			if (currentProcess == null || currentProcess.isFinished())
 				bmgSimulationTimer.getTimer().forward(1);
 		}
-	}
-}
-
-//a simple comparator to check if a process has a been preempted more than another process
-class ProcessComparator_FB implements Comparator<bmgProcess>
-{
-	@Override
-	public int compare(bmgProcess p1, bmgProcess p2)
-	{
-		if (p1.getTimesPreempted() >= 3 && p2.getTimesPreempted() >= 3)
-			return 0;
-		
-		if (p1.getTimesPreempted() < p2.getTimesPreempted())
-			return -1;
-		
-		if (p1.getTimesPreempted() > p2.getTimesPreempted())
-			return 1;
-		
-		return 0;
 	}
 }

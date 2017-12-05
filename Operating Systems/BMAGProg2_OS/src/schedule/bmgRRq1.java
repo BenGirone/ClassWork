@@ -18,6 +18,8 @@ public class bmgRRq1 extends bmgAlgorithm
 	@Override
 	public void run()
 	{
+		System.out.print("RRq1: ");
+		
 		//scheduling loop
 		while (!processes.isEmpty() || !readyQueue.isEmpty() || !currentProcess.isFinished())
 		{
@@ -32,10 +34,7 @@ public class bmgRRq1 extends bmgAlgorithm
 				{
 					//check if the clock should interrupt execution
 					if (q.shouldInterrupt())
-					{
-						//output process info
-						currentProcess.printInfo();
-						
+					{	
 						//change the current process to the next process in the ready queue
 						getNextProcess();
 						
@@ -49,10 +48,7 @@ public class bmgRRq1 extends bmgAlgorithm
 					}
 				}
 				else //current process is finished
-				{
-					//output process info
-					currentProcess.printInfo();
-					
+				{	
 					//reset the interrupt clock if necessary
 					q.reset();
 					
@@ -66,11 +62,11 @@ public class bmgRRq1 extends bmgAlgorithm
 				getNextProcess();
 			}
 		}
-		//output process info
-		currentProcess.printInfo();
 
 		//reset the simulation clock
 		bmgSimulationTimer.getTimer().reset();
+		isDone = true;
+		System.out.println();
 	}
 
 	@Override
@@ -81,10 +77,7 @@ public class bmgRRq1 extends bmgAlgorithm
 		{
 			//check if the next process in the process queue has arrived
 			if (processes.peek().getArrivalTime() <= bmgSimulationTimer.getTimer().getValue())
-			{
-				//output the info of the next process in the process queue
-				processes.peek().printInfo();
-				
+			{	
 				//move the next process in the process queue to the ready queue
 				readyQueue.add(processes.poll()); 
 			}
@@ -95,6 +88,7 @@ public class bmgRRq1 extends bmgAlgorithm
 	protected void executeNextBurst()
 	{
 		//execute the current process for 1 time unit
+		System.out.print(currentProcess.getProcessName() + " ");
 		currentProcess.burst(1);
 	}
 
@@ -110,6 +104,8 @@ public class bmgRRq1 extends bmgAlgorithm
 				//reinsert the the current process into the ready queue
 				currentProcess.incrmentTimesPreempted();
 				readyQueue.add(currentProcess);
+				
+				System.out.print("| ");
 			}
 
 			//set the current process to the next process in the ready queue

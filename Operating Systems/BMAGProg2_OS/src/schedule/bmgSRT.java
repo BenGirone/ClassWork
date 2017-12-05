@@ -18,6 +18,8 @@ public class bmgSRT extends bmgAlgorithm
 	@Override
 	public void run()
 	{
+		System.out.print("SRT: ");
+		
 		//scheduling loop
 		while (!processes.isEmpty() || !readyQueue.isEmpty() || !currentProcess.isFinished())
 		{
@@ -35,9 +37,6 @@ public class bmgSRT extends bmgAlgorithm
 				}
 				else //current process is finished
 				{
-					//output process info
-					currentProcess.printInfo();
-					
 					//change the current process to the next process in the ready queue
 					getNextProcess();
 				}
@@ -49,11 +48,10 @@ public class bmgSRT extends bmgAlgorithm
 			}
 		}
 		
-		//output info of the final process
-		currentProcess.printInfo();
-		
 		//reset the simulation clock
 		bmgSimulationTimer.getTimer().reset();
+		isDone = true;
+		System.out.println();
 	}
 
 	@Override
@@ -77,6 +75,8 @@ public class bmgSRT extends bmgAlgorithm
 							//reinsert the current process into the ready queue
 							currentProcess.incrmentTimesPreempted();
 							readyQueue.add(currentProcess);
+							
+							System.out.print("| ");
 						}
 						
 						//set the current process to the newly arrived process
@@ -84,18 +84,12 @@ public class bmgSRT extends bmgAlgorithm
 					}
 					else
 					{
-						//print the info of the next process in the process queue
-						processes.peek().printInfo();
-						
 						//move the next process in the process queue to the ready queue
 						readyQueue.add(processes.poll()); 
 					}
 				}
 				else
 				{
-					//print the info of the next process in the process queue
-					processes.peek().printInfo();
-					
 					//move the next process in the process queue to the ready queue
 					readyQueue.add(processes.poll()); 
 				}
@@ -107,6 +101,7 @@ public class bmgSRT extends bmgAlgorithm
 	protected void executeNextBurst()
 	{
 		//execute the current process for 1 time unit
+		System.out.print(currentProcess.getProcessName() + " ");
 		currentProcess.burst(1);
 	}
 	
