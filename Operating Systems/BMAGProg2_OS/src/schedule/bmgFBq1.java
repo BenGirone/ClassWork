@@ -1,6 +1,7 @@
 package schedule;
 
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -92,6 +93,15 @@ public class bmgFBq1 extends bmgAlgorithm
 				readyQueue.add(processes.poll()); 
 			}
 		}
+		
+		if (currentProcess != null) {System.out.print(currentProcess.getProcessName() + " ");};
+		for (Iterator<bmgProcess> iterator = readyQueue.iterator(); iterator.hasNext();)
+		{
+			bmgProcess process =iterator.next();
+			
+			System.out.print(process.getProcessName() + " ");
+		}
+		System.out.println();
 	}
 
 	@Override
@@ -110,13 +120,19 @@ public class bmgFBq1 extends bmgAlgorithm
 			//check if the currentProcess should be reinserted into the ready queue
 			if (currentProcess != null && !currentProcess.isFinished())
 			{
-				//reinsert the the current process into the ready queue
-				currentProcess.incrmentTimesPreempted();
-				readyQueue.add(currentProcess);
+				if(currentProcess.getTimesPreempted() >= readyQueue.peek().getTimesPreempted())
+				{
+					//reinsert the the current process into the ready queue
+					currentProcess.incrmentTimesPreempted();
+					readyQueue.add(currentProcess);
+					currentProcess = readyQueue.poll();
+				}
 			}
-
-			//set the current process to the next process in the ready queue
-			currentProcess = readyQueue.poll();
+			else
+			{
+				//set the current process to the next process in the ready queue
+				currentProcess = readyQueue.poll();
+			}
 		}
 		else //ready queue is empty
 		{
@@ -133,6 +149,9 @@ class ProcessComparator_FB implements Comparator<bmgProcess>
 	@Override
 	public int compare(bmgProcess p1, bmgProcess p2)
 	{
+		if (p1.getTimesPreempted() >= 3 && p2.getTimesPreempted() >= 3)
+			return 0;
+		
 		if (p1.getTimesPreempted() < p2.getTimesPreempted())
 			return -1;
 		
