@@ -48,7 +48,7 @@ public class bmgProcess
 			//sleep 1/5th second (this defines how long 1 time unit lasts)
 			try
 			{
-				Thread.sleep(200);
+				Thread.sleep(500);
 			} catch (InterruptedException e)
 			{
 				e.printStackTrace();
@@ -60,31 +60,33 @@ public class bmgProcess
 			//decrease the time remaining
 			remainingTime--;
 			
-			String rowName = "";
-			row = 0;
-			while (rowName != processName)
+			if (bmgMainGUI.table != null)
 			{
-				rowName = (String) bmgMain.getValueAt(bmgMain.table, 0, row);
-				row++;
+				String rowName = "";
+				row = 0;
+				while (rowName != processName)
+				{
+					rowName = (String) bmgMainGUI.getValueAt(bmgMainGUI.table, 0, row);
+					row++;
+				}
+				
+				bmgMainGUI.table.getColumns().get(bmgSimulationTimer.getTimer().getValue()).setCellFactory(e -> {
+				    return new TableCell() {
+				        @Override
+				        protected void updateItem(Object item, boolean empty) {
+				            super.updateItem(item, empty);
+				            
+				            // If index is two we set the background color explicitly.
+		                    if (getIndex() == (row - 1)) {
+		                        this.setStyle("-fx-background-color: green;");
+		                    }
+				            
+				        }
+				    };
+				});
+				
+				bmgMainGUI.table.refresh();
 			}
-			
-			bmgMain.table.getColumns().get(bmgSimulationTimer.getTimer().getValue()).setCellFactory(e -> {
-			    return new TableCell() {
-			        @Override
-			        protected void updateItem(Object item, boolean empty) {
-			            super.updateItem(item, empty);
-			            
-			            // If index is two we set the background color explicitly.
-	                    if (getIndex() == (row - 1)) {
-	                        this.setStyle("-fx-background-color: green;");
-	                    }
-			            
-			        }
-			    };
-			});
-			
-			bmgMain.table.refresh();
-			
 			//check if the process is done executing
 			if (remainingTime <= 0)
 			{

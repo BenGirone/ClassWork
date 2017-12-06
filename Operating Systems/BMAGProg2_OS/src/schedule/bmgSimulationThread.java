@@ -15,6 +15,6 @@ public class bmgSimulationThread extends Thread
 		simulator.printAnalysis();
 		System.out.println("---------------------------------------");
 		
-		bmgMain.processesToBeUsed = bmgMain.chosenProcesses.getResetCopy();
+		bmgMainGUI.processesToBeUsed = bmgMainGUI.chosenProcesses.getResetCopy();
 	}
 }

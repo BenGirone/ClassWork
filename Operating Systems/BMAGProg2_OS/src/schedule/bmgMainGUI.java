@@ -1,5 +1,6 @@
 //Ben Girone CSC 403 12/5/17
 //This program implements 8 short term scheduling algorithms.
+//This version of the program loads a GUI that animates each processes progression.
 
 package schedule;
 
@@ -32,10 +33,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-public class bmgMain extends Application
+public class bmgMainGUI extends Application
 {
 	Stage window;
-    public static TableView<bmgProcess> table;
+    public static TableView<bmgProcess> table = null;
 	
     public static bmgQueue processes_saved = new bmgQueue(new LinkedList<bmgProcess>());
     public static bmgQueue processes_book_saved = new bmgQueue(new LinkedList<bmgProcess>());
@@ -194,6 +195,8 @@ public class bmgMain extends Application
         
         Scene scene = new Scene(vBox);
         window.setScene(scene);
+        
+        window.setMinWidth(350);
         window.show();
 	}
 	
