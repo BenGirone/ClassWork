@@ -1,10 +1,10 @@
 package schedule;
 
-public class SimulationThread extends Thread
+public class bmgSimulationThread extends Thread
 {
 	private bmgSimulator simulator;
 
-	public SimulationThread(bmgSimulator simulator)
+	public bmgSimulationThread(bmgSimulator simulator)
 	{
 		this.simulator = simulator;
 	}
@@ -14,5 +14,7 @@ public class SimulationThread extends Thread
 		simulator.start();
 		simulator.printAnalysis();
 		System.out.println("---------------------------------------");
+		
+		bmgMain.processesToBeUsed = bmgMain.chosenProcesses.getResetCopy();
 	}
 }

@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -29,6 +30,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class bmgMain extends Application
 {
@@ -37,6 +39,7 @@ public class bmgMain extends Application
 	
     public static bmgQueue processes_saved = new bmgQueue(new LinkedList<bmgProcess>());
     public static bmgQueue processes_book_saved = new bmgQueue(new LinkedList<bmgProcess>());
+    public static bmgQueue chosenProcesses = processes_saved;
     public static Queue<bmgProcess> processesToBeUsed;
     public static bmgSimulator simulatorToBeUsed;
     
@@ -93,24 +96,6 @@ public class bmgMain extends Application
         rb2.setToggleGroup(group1);
         rb2.setUserData("book");
         
-        group1.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            public void changed(ObservableValue<? extends Toggle> ov,
-                Toggle old_toggle, Toggle new_toggle) {
-              if (group1.getSelectedToggle() != null) {
-                if (group1.getSelectedToggle().getUserData() == "assigned")
-                {
-                	processesToBeUsed = processes_saved.getResetCopy();
-                	getNewTable();
-                }
-                else
-                {
-                	processesToBeUsed = processes_book_saved.getResetCopy();
-                	getNewTable();
-                }
-              }
-            }
-          });
-        
         final ToggleGroup group2 = new ToggleGroup();
         RadioButton rbFCFS = new RadioButton("FCFS");
         rbFCFS.setToggleGroup(group2);
@@ -138,45 +123,6 @@ public class bmgMain extends Application
         rbFBq2i.setToggleGroup(group2);
         rbFBq2i.setUserData("FBq2i");
         
-        group2.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            public void changed(ObservableValue<? extends Toggle> ov,
-                Toggle old_toggle, Toggle new_toggle) {
-              if (group2.getSelectedToggle() != null) {
-                switch (group2.getSelectedToggle().getUserData().toString())
-				{
-					case "FCFS":
-						simulatorToBeUsed = new bmgSimulator(new bmgFCFS(processesToBeUsed));
-						break;
-					case "RRq1":
-						simulatorToBeUsed = new bmgSimulator(new bmgRRq1(processesToBeUsed));
-						break;
-					case "RRq4":
-						simulatorToBeUsed = new bmgSimulator(new bmgRRq4(processesToBeUsed));
-						break;
-					case "SPN":
-						simulatorToBeUsed = new bmgSimulator(new bmgSPN(processesToBeUsed));
-						break;
-					case "SRT":
-						simulatorToBeUsed = new bmgSimulator(new bmgSRT(processesToBeUsed));
-						break;
-					case "HRRN":
-						simulatorToBeUsed = new bmgSimulator(new bmgHRRN(processesToBeUsed));
-						break;
-					case "FBq1":
-						simulatorToBeUsed = new bmgSimulator(new bmgFBq1(processesToBeUsed));
-						break;
-					case "FBq2i":
-						simulatorToBeUsed = new bmgSimulator(new bmgFBq2i(processesToBeUsed));
-						break;
-					default:
-						break;
-				}
-              }
-            }
-          });
-        
-        getNewTable();
-        
         Separator separator1 = new Separator();
         
         Button startButton = new Button("Run");
@@ -185,52 +131,109 @@ public class bmgMain extends Application
 			@Override
 			public void handle(ActionEvent event)
 			{
-				new SimulationThread(simulatorToBeUsed).start();
+				if (group1.getSelectedToggle() != null) {
+	                if (group1.getSelectedToggle().getUserData() == "assigned")
+	                {
+	                	chosenProcesses = processes_saved;
+	                }
+	                else
+	                {
+	                	chosenProcesses = processes_book_saved;
+	                }
+	                
+	                processesToBeUsed = chosenProcesses.getResetCopy(); 
+	              }
+				
+				if (group2.getSelectedToggle() != null) {
+	                switch (group2.getSelectedToggle().getUserData().toString())
+					{
+						case "FCFS":
+							simulatorToBeUsed = new bmgSimulator(new bmgFCFS(processesToBeUsed));
+							break;
+						case "RRq1":
+							simulatorToBeUsed = new bmgSimulator(new bmgRRq1(processesToBeUsed));
+							break;
+						case "RRq4":
+							simulatorToBeUsed = new bmgSimulator(new bmgRRq4(processesToBeUsed));
+							break;
+						case "SPN":
+							simulatorToBeUsed = new bmgSimulator(new bmgSPN(processesToBeUsed));
+							break;
+						case "SRT":
+							simulatorToBeUsed = new bmgSimulator(new bmgSRT(processesToBeUsed));
+							break;
+						case "HRRN":
+							simulatorToBeUsed = new bmgSimulator(new bmgHRRN(processesToBeUsed));
+							break;
+						case "FBq1":
+							simulatorToBeUsed = new bmgSimulator(new bmgFBq1(processesToBeUsed));
+							break;
+						case "FBq2i":
+							simulatorToBeUsed = new bmgSimulator(new bmgFBq2i(processesToBeUsed));
+							break;
+						default:
+							break;
+					}
+	              }
+				
+				Stage stage = new Stage();
+	            stage.setTitle("Simulation");
+	            VBox vBox = new VBox();
+	            getNewTable();
+	            vBox.getChildren().addAll(table);
+	            stage.setScene(new Scene(vBox));
+	            stage.show();
+				
+				new bmgSimulationThread(simulatorToBeUsed).start();
 			}
 		});
         
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(table, startButton, rb1, rb2, separator1, rbFCFS, rbRRq1, rbRRq4, rbSPN, rbSRT, rbHRRN, rbFBq1, rbFBq2i);
+        vBox.getChildren().addAll(startButton, rb1, rb2, separator1, rbFCFS, rbRRq1, rbRRq4, rbSPN, rbSRT, rbHRRN, rbFBq1, rbFBq2i);
         
-
+        
         Scene scene = new Scene(vBox);
         window.setScene(scene);
         window.show();
 	}
-
+	
 	private void getNewTable()
 	{
 		table = new TableView();
-        table.setEditable(false);
+	    table.setEditable(false);
 
-        TableColumn<bmgProcess, String> nameCol = new TableColumn<>("Process Name");
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("processName"));
-        nameCol.setSortable(false);
-        
-        int cols = 0;
-        for (Iterator<bmgProcess> iterator = processesToBeUsed.iterator(); iterator.hasNext();)
+	    TableColumn<bmgProcess, String> nameCol = new TableColumn<>("Process Name");
+	    nameCol.setCellValueFactory(new PropertyValueFactory<>("processName"));
+	    nameCol.setSortable(false);
+	    
+	    int cols = 0;
+	    for (Iterator<bmgProcess> iterator = processesToBeUsed.iterator(); iterator.hasNext();)
 		{
 			bmgProcess process = iterator.next();
 			cols += process.getServiceTime();
 		}
-        
-        for (int i = 1; i <= cols; i++)
-        {
-        	TableColumn col = new TableColumn(Integer.toString(i));
-        	col.setMinWidth(50);
-            table.getColumns().add(col);
-            col.setSortable(false);
-        }
-        
-        TableColumn<bmgProcess, String> timeCol = new TableColumn<>("Remaining Time");
-        timeCol.setCellValueFactory(new PropertyValueFactory<>("remainingTime"));
-        timeCol.setSortable(false);
-        
-        table.setItems(FXCollections.observableArrayList(processesToBeUsed));
-        table.getColumns().add(0, nameCol);
-        table.getColumns().add(timeCol);
-        
-        table.refresh();
+	    
+	    for (int i = 1; i <= cols; i++)
+	    {
+	    	TableColumn<bmgProcess, Object> col = new TableColumn<bmgProcess, Object>(Integer.toString(i));
+	    	col.setMinWidth(50);
+	        table.getColumns().add(col);
+	        col.setSortable(false);
+	        
+	    }
+	    
+	    TableColumn<bmgProcess, String> timeCol = new TableColumn<>("Remaining Time");
+	    timeCol.setCellValueFactory(new PropertyValueFactory<>("remainingTime"));
+	    timeCol.setSortable(false);
+	    
+	    table.setItems(FXCollections.observableArrayList(processesToBeUsed));
+	    table.getColumns().add(0, nameCol);
+	    table.getColumns().add(timeCol);
+	    
+	    table.refresh();
 	}
-
+	
+	public static Object getValueAt(TableView table, int column, int row) {
+	    return ((TableColumn<bmgProcess, String>) table.getColumns().get(column)).getCellObservableValue(row).getValue();
+	}
 }

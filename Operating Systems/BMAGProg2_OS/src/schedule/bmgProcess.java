@@ -3,6 +3,10 @@
 
 package schedule;
 
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.util.Callback;
+
 public class bmgProcess
 {
 	//data members
@@ -15,6 +19,7 @@ public class bmgProcess
 	private int remainingTime;
 	private int timesPreempted = 0;
 	private int TT;
+	private int row;
 	
 	//constructor
 	public bmgProcess(String processName, int arrivalTime, int serviceTime)
@@ -54,6 +59,29 @@ public class bmgProcess
 			
 			//decrease the time remaining
 			remainingTime--;
+			
+			String rowName = "";
+			row = 0;
+			while (rowName != processName)
+			{
+				rowName = (String) bmgMain.getValueAt(bmgMain.table, 0, row);
+				row++;
+			}
+			
+			bmgMain.table.getColumns().get(bmgSimulationTimer.getTimer().getValue()).setCellFactory(e -> {
+			    return new TableCell() {
+			        @Override
+			        protected void updateItem(Object item, boolean empty) {
+			            super.updateItem(item, empty);
+			            
+			            // If index is two we set the background color explicitly.
+	                    if (getIndex() == (row - 1)) {
+	                        this.setStyle("-fx-background-color: green;");
+	                    }
+			            
+			        }
+			    };
+			});
 			
 			bmgMain.table.refresh();
 			
