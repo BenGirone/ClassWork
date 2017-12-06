@@ -3,6 +3,10 @@
 
 package schedule;
 
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.util.Callback;
+
 public class bmgProcess
 {
 	//data members
@@ -15,6 +19,7 @@ public class bmgProcess
 	private int remainingTime;
 	private int timesPreempted = 0;
 	private int TT;
+	private int row;
 	
 	//constructor
 	public bmgProcess(String processName, int arrivalTime, int serviceTime)
@@ -43,7 +48,7 @@ public class bmgProcess
 			//sleep 1/5th second (this defines how long 1 time unit lasts)
 			try
 			{
-				Thread.sleep(200);
+				Thread.sleep(500);
 			} catch (InterruptedException e)
 			{
 				e.printStackTrace();
@@ -55,6 +60,33 @@ public class bmgProcess
 			//decrease the time remaining
 			remainingTime--;
 			
+			if (bmgMainGUI.table != null)
+			{
+				String rowName = "";
+				row = 0;
+				while (rowName != processName)
+				{
+					rowName = (String) bmgMainGUI.getValueAt(bmgMainGUI.table, 0, row);
+					row++;
+				}
+				
+				bmgMainGUI.table.getColumns().get(bmgSimulationTimer.getTimer().getValue()).setCellFactory(e -> {
+				    return new TableCell() {
+				        @Override
+				        protected void updateItem(Object item, boolean empty) {
+				            super.updateItem(item, empty);
+				            
+				            // If index is two we set the background color explicitly.
+		                    if (getIndex() == (row - 1)) {
+		                        this.setStyle("-fx-background-color: green;");
+		                    }
+				            
+				        }
+				    };
+				});
+				
+				bmgMainGUI.table.refresh();
+			}
 			//check if the process is done executing
 			if (remainingTime <= 0)
 			{
