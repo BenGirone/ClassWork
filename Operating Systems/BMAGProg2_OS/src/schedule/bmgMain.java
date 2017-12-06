@@ -1,3 +1,6 @@
+//Ben Girone CSC 403 12/5/17
+//This program implements 8 short term scheduling algorithms.
+
 package schedule;
 
 import java.util.LinkedList;
@@ -7,6 +10,7 @@ public class bmgMain
 
 	public static void main(String[] args)
 	{
+		//processes assigned on blackboard
 		bmgProcess A = new bmgProcess("A", 0, 3);
 		bmgProcess B = new bmgProcess("B", 1, 6);
 		bmgProcess C = new bmgProcess("C", 2, 4);
@@ -14,12 +18,14 @@ public class bmgMain
 		bmgProcess E = new bmgProcess("E", 6, 4);
 		bmgProcess F = new bmgProcess("F", 8, 2);
 
+		//processes from the book
 		bmgProcess A_book = new bmgProcess("A", 0, 3);
 		bmgProcess B_book = new bmgProcess("B", 2, 6);
 		bmgProcess C_book = new bmgProcess("C", 4, 4);
 		bmgProcess D_book = new bmgProcess("D", 6, 5);
 		bmgProcess E_book = new bmgProcess("E", 8, 2);
 			
+		//make a queue in order of arrival time
 		bmgQueue processes = new bmgQueue(new LinkedList<bmgProcess>());
 		processes.add(A);
 		processes.add(B);
@@ -28,6 +34,7 @@ public class bmgMain
 		processes.add(E);
 		processes.add(F);
 		
+		//make a queue in order of arrival time
 		bmgQueue processes_book = new bmgQueue(new LinkedList<bmgProcess>());
 		processes_book.add(A_book);
 		processes_book.add(B_book);
@@ -35,6 +42,7 @@ public class bmgMain
 		processes_book.add(D_book);
 		processes_book.add(E_book);
 		
+		//make simulator objects
 		bmgSimulator FCFS = new bmgSimulator(new bmgFCFS(processes.getResetCopy()));
 		bmgSimulator RRq1 = new bmgSimulator(new bmgRRq1(processes.getResetCopy()));
 		bmgSimulator RRq4 = new bmgSimulator(new bmgRRq4(processes.getResetCopy()));
@@ -44,6 +52,7 @@ public class bmgMain
 		bmgSimulator FBq1 = new bmgSimulator(new bmgFBq1(processes.getResetCopy()));
 		bmgSimulator FBq2i = new bmgSimulator(new bmgFBq2i(processes.getResetCopy()));
 		
+		//make simulator objects
 		bmgSimulator FCFS_book = new bmgSimulator(new bmgFCFS(processes_book.getResetCopy()));
 		bmgSimulator RRq1_book = new bmgSimulator(new bmgRRq1(processes_book.getResetCopy()));
 		bmgSimulator RRq4_book = new bmgSimulator(new bmgRRq4(processes_book.getResetCopy()));
@@ -53,6 +62,7 @@ public class bmgMain
 		bmgSimulator FBq1_book = new bmgSimulator(new bmgFBq1(processes_book.getResetCopy()));
 		bmgSimulator FBq2i_book = new bmgSimulator(new bmgFBq2i(processes_book.getResetCopy()));
 		
+		//run each simulator and print the analysis
 		FCFS.start();
 		FCFS.printAnalysis();
 		System.out.println("--------------------------------");
@@ -80,6 +90,7 @@ public class bmgMain
 		
 		System.out.println("\n\nRunning the processes in the book to ensure the algorithms are correct.\n\n");
 		
+		//run each simulator and print the analysis
 		FCFS_book.start();
 		FCFS_book.printAnalysis();
 		System.out.println("--------------------------------");

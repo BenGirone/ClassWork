@@ -1,3 +1,6 @@
+//Ben Girone CSC 403 12/5/17
+//This file defines the RRq4 algorithm class. 
+
 package schedule;
 
 import java.util.LinkedList;

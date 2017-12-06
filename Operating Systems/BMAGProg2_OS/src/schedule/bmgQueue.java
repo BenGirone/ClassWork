@@ -1,3 +1,6 @@
+//Ben Girone CSC 403 12/5/17
+//This file defines a custom copy-able queue class. 
+
 package schedule;
 
 import java.util.Collection;
@@ -8,18 +11,25 @@ import java.util.Queue;
 public class bmgQueue implements Queue<bmgProcess>
 {
 	
+	//data members
 	public Queue<bmgProcess> queue;
 	
+	//constructor
 	public bmgQueue(Queue<bmgProcess> queue)
 	{
 		this.queue = queue;
 	}
 	
+	//constructor
 	public bmgQueue(LinkedList<bmgProcess> queue)
 	{
 		this.queue = queue;
 	}
 	
+	/**
+	 * Gets a copy of this process queue.
+	 * @return A queue containing all the elements in this queue.
+	 */
 	public Queue<bmgProcess> getResetCopy()
 	{	
 		Queue<bmgProcess> copy = new LinkedList<bmgProcess>();

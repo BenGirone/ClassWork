@@ -1,8 +1,11 @@
+//Ben Girone CSC 403 12/5/17
+//This file defines the process class. 
+
 package schedule;
 
 public class bmgProcess
 {
-	//variable declaration
+	//data members
 	private String processName;
 	private int arrivalTime;
 	private int serviceTime;
@@ -22,7 +25,10 @@ public class bmgProcess
 		this.remainingTime = serviceTime;
 	}
 	
-	
+	/**
+	 * Executes the process for the specified amount of time.
+	 * @param burst The amount of time units to burst for.
+	 */
 	public void burst(int burst)
 	{
 		//check if this is the first burst
@@ -61,11 +67,19 @@ public class bmgProcess
 		}
 	}
 	
+	/**
+	 * Gets a reset copy of this process.
+	 * @return An unstarted copy of this object.
+	 */
 	public bmgProcess getResetCopy()
 	{
 		return new bmgProcess(this.processName, this.arrivalTime, this.serviceTime);
 	}
 	
+	/**
+	 * Gets all info of the process if completed.
+	 * @return A string representation of each variable in the object.
+	 */
 	public String getInfo()
 	{
 		String info = "";
@@ -84,66 +98,108 @@ public class bmgProcess
 		return info;
 	}
 
+	/**
+	 * Gets the process name
+	 * @return A string representation of the process name
+	 */
 	public String getProcessName()
 	{
 		return processName;
 	}
 	
+	/**
+	 * Gets the process arrival time.
+	 * @return An integer representation of the arrival time
+	 */
 	public int getArrivalTime()
 	{
 		return arrivalTime;
 	}
 	
+	/**
+	 * Gets the process service time.
+	 * @return An integer representation of the service time
+	 */
 	public int getServiceTime()
 	{
 		return serviceTime;
 	}
 	
+	/**
+	 * Gets the process arrival time.
+	 * @return An integer representation of the startTime time
+	 */
 	public int getStartTime()
 	{
 		return startTime;
 	}
 
+	/**
+	 * Sets the process start time. 
+	 * @param startTime 
+	 */
 	public void setStartTime(int startTime)
 	{
 		this.startTime = startTime;
 	}
 
+	/**
+	 * Checks if the process has completed running.
+	 * @return True if the process has completed running, false otherwise.
+	 */
 	public boolean isFinished()
 	{
 		return finished;
 	}
 
+	/**
+	 * Gets the time at which the process exited.
+	 * @return An integer representation of the exiting time.
+	 */
 	public int getFinishTime()
 	{
 		return finishTime;
 	}
 
+	/**
+	 * Sets the time at which the process exited.
+	 * @param finishTime
+	 */
 	public void setFinishTime(int finishTime)
 	{
 		this.finishTime = finishTime;
 	}
 
+	/**
+	 * Gets the remaining time needed to complete execution.
+	 * @return The remaining service time needed by the process.
+	 */
 	public int getRemainingTime()
 	{
 		return remainingTime;
 	}
-
-	public void setRemainingTime(int remainingTime)
-	{
-		this.remainingTime = remainingTime;
-	}
 	
+	/**
+	 * Gets the number of times this process was preempted.
+	 * @return An integer representing the number of preemptions.
+	 */
 	public int getTimesPreempted()
 	{
 		return timesPreempted;
 	}
 	
+	/**
+	 * Increases the number of times this process was preempted by 1.
+	 */
 	public void incrmentTimesPreempted()
 	{
 		timesPreempted++;
 	}
 
+	/**
+	 * Gets the total time this process has been available to run.
+	 * @return An integer representing the turn around time.
+	 */
 	public double getTT()
 	{
 		return TT;

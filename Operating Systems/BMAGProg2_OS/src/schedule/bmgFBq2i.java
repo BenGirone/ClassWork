@@ -1,11 +1,14 @@
+//Ben Girone CSC 403 12/5/17
+//This file defines the FBq2i algorithm class. 
+
 package schedule;
 
 import java.util.Queue;
 
 public class bmgFBq2i extends bmgAlgorithm
 {
-	
-	bmgMultiQueue readyQueue = new bmgMultiQueue(4);
+	//multi-queue
+	private bmgMultiQueue readyQueue = new bmgMultiQueue(4);
 	private bmgTimeQuantum q = new bmgTimeQuantum(1);
 	
 	//constructor
@@ -34,9 +37,6 @@ public class bmgFBq2i extends bmgAlgorithm
 					//check if the clock should interrupt execution
 					if (q.shouldInterrupt())
 					{
-						//output process info
-						//currentProcess.printInfo();
-						
 						//change the current process to the next process in the ready queue
 						getNextProcess();
 						
@@ -51,9 +51,6 @@ public class bmgFBq2i extends bmgAlgorithm
 				}
 				else //current process is finished
 				{
-					//output process info
-					//currentProcess.printInfo();
-					
 					//reset the interrupt clock if necessary
 					q.reset();
 					
@@ -67,9 +64,7 @@ public class bmgFBq2i extends bmgAlgorithm
 				getNextProcess();
 			}
 		}
-		//output process info
-		//currentProcess.printInfo();
-
+		
 		//reset the simulation clock
 		bmgSimulationTimer.getTimer().reset();
 		isDone = true;
@@ -85,9 +80,6 @@ public class bmgFBq2i extends bmgAlgorithm
 			//check if the next process in the process queue has arrived
 			if (processes.peek().getArrivalTime() <= bmgSimulationTimer.getTimer().getValue())
 			{
-				//output the info of the next process in the process queue
-				//processes.peek().printInfo();
-				
 				//move the next process in the process queue to the ready queue
 				readyQueue.add(processes.poll()); 
 			}

@@ -1,3 +1,6 @@
+//Ben Girone CSC 403 12/5/17
+//This file defines the SRT algorithm class. 
+
 package schedule;
 
 import java.util.Comparator;
