@@ -3,11 +3,43 @@
 
 package schedule;
 
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Queue;
 
-public class bmgMain
+import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Separator;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class bmgMain extends Application
 {
-
+	Stage window;
+    public static TableView<bmgProcess> table;
+	
+    public static bmgQueue processes_saved = new bmgQueue(new LinkedList<bmgProcess>());
+    public static bmgQueue processes_book_saved = new bmgQueue(new LinkedList<bmgProcess>());
+    public static Queue<bmgProcess> processesToBeUsed;
+    public static bmgSimulator simulatorToBeUsed;
+    
 	public static void main(String[] args)
 	{
 		//processes assigned on blackboard
@@ -26,95 +58,179 @@ public class bmgMain
 		bmgProcess E_book = new bmgProcess("E", 8, 2);
 			
 		//make a queue in order of arrival time
-		bmgQueue processes = new bmgQueue(new LinkedList<bmgProcess>());
-		processes.add(A);
-		processes.add(B);
-		processes.add(C);
-		processes.add(D);
-		processes.add(E);
-		processes.add(F);
+		processes_saved.add(A);
+		processes_saved.add(B);
+		processes_saved.add(C);
+		processes_saved.add(D);
+		processes_saved.add(E);
+		processes_saved.add(F);
 		
 		//make a queue in order of arrival time
-		bmgQueue processes_book = new bmgQueue(new LinkedList<bmgProcess>());
-		processes_book.add(A_book);
-		processes_book.add(B_book);
-		processes_book.add(C_book);
-		processes_book.add(D_book);
-		processes_book.add(E_book);
+		processes_book_saved.add(A_book);
+		processes_book_saved.add(B_book);
+		processes_book_saved.add(C_book);
+		processes_book_saved.add(D_book);
+		processes_book_saved.add(E_book);
 		
-		//make simulator objects
-		bmgSimulator FCFS = new bmgSimulator(new bmgFCFS(processes.getResetCopy()));
-		bmgSimulator RRq1 = new bmgSimulator(new bmgRRq1(processes.getResetCopy()));
-		bmgSimulator RRq4 = new bmgSimulator(new bmgRRq4(processes.getResetCopy()));
-		bmgSimulator SPN = new bmgSimulator(new bmgSPN(processes.getResetCopy()));
-		bmgSimulator SRT = new bmgSimulator(new bmgSRT(processes.getResetCopy()));
-		bmgSimulator HRRN = new bmgSimulator(new bmgHRRN(processes.getResetCopy()));
-		bmgSimulator FBq1 = new bmgSimulator(new bmgFBq1(processes.getResetCopy()));
-		bmgSimulator FBq2i = new bmgSimulator(new bmgFBq2i(processes.getResetCopy()));
+		processesToBeUsed = processes_saved.getResetCopy();
+		simulatorToBeUsed = new bmgSimulator(new bmgFCFS(processesToBeUsed));
 		
-		//make simulator objects
-		bmgSimulator FCFS_book = new bmgSimulator(new bmgFCFS(processes_book.getResetCopy()));
-		bmgSimulator RRq1_book = new bmgSimulator(new bmgRRq1(processes_book.getResetCopy()));
-		bmgSimulator RRq4_book = new bmgSimulator(new bmgRRq4(processes_book.getResetCopy()));
-		bmgSimulator SPN_book = new bmgSimulator(new bmgSPN(processes_book.getResetCopy()));
-		bmgSimulator SRT_book = new bmgSimulator(new bmgSRT(processes_book.getResetCopy()));
-		bmgSimulator HRRN_book = new bmgSimulator(new bmgHRRN(processes_book.getResetCopy()));
-		bmgSimulator FBq1_book = new bmgSimulator(new bmgFBq1(processes_book.getResetCopy()));
-		bmgSimulator FBq2i_book = new bmgSimulator(new bmgFBq2i(processes_book.getResetCopy()));
-		
-		//run each simulator and print the analysis
-		FCFS.start();
-		FCFS.printAnalysis();
-		System.out.println("--------------------------------");
-		RRq1.start();
-		RRq1.printAnalysis();
-		System.out.println("--------------------------------");
-		RRq4.start();
-		RRq4.printAnalysis();
-		System.out.println("--------------------------------");
-		SPN.start();
-		SPN.printAnalysis();
-		System.out.println("--------------------------------");
-		SRT.start();
-		SRT.printAnalysis();
-		System.out.println("--------------------------------");
-		HRRN.start();
-		HRRN.printAnalysis();
-		System.out.println("--------------------------------");
-		FBq1.start();
-		FBq1.printAnalysis();
-		System.out.println("--------------------------------");
-		FBq2i.start();
-		FBq2i.printAnalysis();
-		System.out.println("--------------------------------");
-		
-		System.out.println("\n\nRunning the processes in the book to ensure the algorithms are correct.\n\n");
-		
-		//run each simulator and print the analysis
-		FCFS_book.start();
-		FCFS_book.printAnalysis();
-		System.out.println("--------------------------------");
-		RRq1_book.start();
-		RRq1_book.printAnalysis();
-		System.out.println("--------------------------------");
-		RRq4_book.start();
-		RRq4_book.printAnalysis();
-		System.out.println("--------------------------------");
-		SPN_book.start();
-		SPN_book.printAnalysis();
-		System.out.println("--------------------------------");
-		SRT_book.start();
-		SRT_book.printAnalysis();
-		System.out.println("--------------------------------");
-		HRRN_book.start();
-		HRRN_book.printAnalysis();
-		System.out.println("--------------------------------");
-		FBq1_book.start();
-		FBq1_book.printAnalysis();
-		System.out.println("--------------------------------");
-		FBq2i_book.start();
-		FBq2i_book.printAnalysis();
-		System.out.println("--------------------------------");
+		launch(args);
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception
+	{
+		window = primaryStage;
+        window.setTitle("Ben Girone CSC 403");
+        
+        final ToggleGroup group1 = new ToggleGroup();
+        RadioButton rb1 = new RadioButton("Assigned Processes");
+        rb1.setToggleGroup(group1);
+        rb1.setSelected(true);
+        rb1.setUserData("assigned");
+        RadioButton rb2 = new RadioButton("Processes from the text book.");
+        rb2.setToggleGroup(group1);
+        rb2.setUserData("book");
+        
+        group1.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            public void changed(ObservableValue<? extends Toggle> ov,
+                Toggle old_toggle, Toggle new_toggle) {
+              if (group1.getSelectedToggle() != null) {
+                if (group1.getSelectedToggle().getUserData() == "assigned")
+                {
+                	processesToBeUsed = processes_saved.getResetCopy();
+                	getNewTable();
+                }
+                else
+                {
+                	processesToBeUsed = processes_book_saved.getResetCopy();
+                	getNewTable();
+                }
+              }
+            }
+          });
+        
+        final ToggleGroup group2 = new ToggleGroup();
+        RadioButton rbFCFS = new RadioButton("FCFS");
+        rbFCFS.setToggleGroup(group2);
+        rbFCFS.setSelected(true);
+        rbFCFS.setUserData("FCFS");
+        RadioButton rbRRq1 = new RadioButton("RRq1");
+        rbRRq1.setToggleGroup(group2);
+        rbRRq1.setUserData("RRq1");
+        RadioButton rbRRq4 = new RadioButton("RRq4");
+        rbRRq4.setToggleGroup(group2);
+        rbRRq4.setUserData("RRq4");
+        RadioButton rbSPN = new RadioButton("SPN");
+        rbSPN.setToggleGroup(group2);
+        rbSPN.setUserData("SPN");
+        RadioButton rbSRT = new RadioButton("SRT");
+        rbSRT.setToggleGroup(group2);
+        rbSRT.setUserData("SRT");
+        RadioButton rbHRRN = new RadioButton("HRRN");
+        rbHRRN.setToggleGroup(group2);
+        rbHRRN.setUserData("HRRN");
+        RadioButton rbFBq1 = new RadioButton("FBq1");
+        rbFBq1.setToggleGroup(group2);
+        rbFBq1.setUserData("FBq1");
+        RadioButton rbFBq2i = new RadioButton("FBq2i");
+        rbFBq2i.setToggleGroup(group2);
+        rbFBq2i.setUserData("FBq2i");
+        
+        group2.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            public void changed(ObservableValue<? extends Toggle> ov,
+                Toggle old_toggle, Toggle new_toggle) {
+              if (group2.getSelectedToggle() != null) {
+                switch (group2.getSelectedToggle().getUserData().toString())
+				{
+					case "FCFS":
+						simulatorToBeUsed = new bmgSimulator(new bmgFCFS(processesToBeUsed));
+						break;
+					case "RRq1":
+						simulatorToBeUsed = new bmgSimulator(new bmgRRq1(processesToBeUsed));
+						break;
+					case "RRq4":
+						simulatorToBeUsed = new bmgSimulator(new bmgRRq4(processesToBeUsed));
+						break;
+					case "SPN":
+						simulatorToBeUsed = new bmgSimulator(new bmgSPN(processesToBeUsed));
+						break;
+					case "SRT":
+						simulatorToBeUsed = new bmgSimulator(new bmgSRT(processesToBeUsed));
+						break;
+					case "HRRN":
+						simulatorToBeUsed = new bmgSimulator(new bmgHRRN(processesToBeUsed));
+						break;
+					case "FBq1":
+						simulatorToBeUsed = new bmgSimulator(new bmgFBq1(processesToBeUsed));
+						break;
+					case "FBq2i":
+						simulatorToBeUsed = new bmgSimulator(new bmgFBq2i(processesToBeUsed));
+						break;
+					default:
+						break;
+				}
+              }
+            }
+          });
+        
+        getNewTable();
+        
+        Separator separator1 = new Separator();
+        
+        Button startButton = new Button("Run");
+        startButton.setOnAction(new EventHandler<ActionEvent>()
+		{
+			@Override
+			public void handle(ActionEvent event)
+			{
+				new SimulationThread(simulatorToBeUsed).start();
+			}
+		});
+        
+        VBox vBox = new VBox();
+        vBox.getChildren().addAll(table, startButton, rb1, rb2, separator1, rbFCFS, rbRRq1, rbRRq4, rbSPN, rbSRT, rbHRRN, rbFBq1, rbFBq2i);
+        
+
+        Scene scene = new Scene(vBox);
+        window.setScene(scene);
+        window.show();
+	}
+
+	private void getNewTable()
+	{
+		table = new TableView();
+        table.setEditable(false);
+
+        TableColumn<bmgProcess, String> nameCol = new TableColumn<>("Process Name");
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("processName"));
+        nameCol.setSortable(false);
+        
+        int cols = 0;
+        for (Iterator<bmgProcess> iterator = processesToBeUsed.iterator(); iterator.hasNext();)
+		{
+			bmgProcess process = iterator.next();
+			cols += process.getServiceTime();
+		}
+        
+        for (int i = 1; i <= cols; i++)
+        {
+        	TableColumn col = new TableColumn(Integer.toString(i));
+        	col.setMinWidth(50);
+            table.getColumns().add(col);
+            col.setSortable(false);
+        }
+        
+        TableColumn<bmgProcess, String> timeCol = new TableColumn<>("Remaining Time");
+        timeCol.setCellValueFactory(new PropertyValueFactory<>("remainingTime"));
+        timeCol.setSortable(false);
+        
+        table.setItems(FXCollections.observableArrayList(processesToBeUsed));
+        table.getColumns().add(0, nameCol);
+        table.getColumns().add(timeCol);
+        
+        table.refresh();
 	}
 
 }

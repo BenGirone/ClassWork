@@ -55,6 +55,8 @@ public class bmgProcess
 			//decrease the time remaining
 			remainingTime--;
 			
+			bmgMain.table.refresh();
+			
 			//check if the process is done executing
 			if (remainingTime <= 0)
 			{
