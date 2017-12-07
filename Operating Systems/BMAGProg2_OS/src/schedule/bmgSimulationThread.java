@@ -1,3 +1,6 @@
+//Ben Girone CSC 403 12/5/17
+//This file defines a thread class to execute a scheduling algorithm outside the GUI. 
+
 package schedule;
 
 public class bmgSimulationThread extends Thread
