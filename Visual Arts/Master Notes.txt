@@ -345,4 +345,56 @@ PP3:
         -20
             -figura serpentinata
             
+//----------12/6/17----------//
+    -PP11:
+        -35
+            -an example of a genre image (scenes of everyday life)
+                -landscapes are also a example of genre
+        
+        -55
+            -vermeer is believed to have used a camera obscura
+                -kinda like a projector thing
+        
+    -FinalReview
+        
+        -Late Medieval
+        -Early Renaissance
+        -Early northern
+        -Northern Renaissance
+        -High renaissance
+        -Mannerism
+        -Spanish Renaissance
+        -Italian/Dutch/Spanish/French Baroque 
+        
+        
+        -4
+            -continuous narrative
+            -atmospheric perspective
+                -haziness
+                
+        -6
+            -minimizes the figure
+            -grand space
+            
+        -8
+            -triangle gives stability
+            -dead trees vs. live trees
+            
+        -10
+            -polyptych
+                -many panels
+            -technically a triptych
+            
+        -11
+            -the mary-jesus-john the basptist triangle is called a deisis
+            
+        -12
+            -mary and jeesus in the same pose
+            
+        -17
+            -part of the humanist tradition of the high renaissance
+            
+        -22
+            -figura serpintinata
+            
         
