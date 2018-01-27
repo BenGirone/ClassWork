@@ -10,9 +10,9 @@ import java.util.Queue;
 public class bmgMultiQueue
 {
 	//multiQueue
-	ArrayList<Queue<bmgProcess>> RQ = new ArrayList<Queue<bmgProcess>>();
-	int currentRQ;
-	int I;
+	private ArrayList<Queue<bmgProcess>> RQ = new ArrayList<Queue<bmgProcess>>();
+	private int currentRQ;
+	private int I;
 	
 	public bmgMultiQueue(int I)
 	{
@@ -104,7 +104,7 @@ public class bmgMultiQueue
 		int i = 0;
 		Queue<bmgProcess> RQi = RQ.get(i);
 		
-		while (RQi.isEmpty())
+		while (RQi.isEmpty() && i < I)
 		{
 			i++;
 			RQi = RQ.get(i);

@@ -45,7 +45,7 @@ public class bmgProcess
 		//perform each burst
 		for (int i = 0; i < burst; i++)
 		{
-			//sleep 1/5th second (this defines how long 1 time unit lasts)
+			//sleep 1/2 second (this defines how long 1 time unit lasts)
 			try
 			{
 				Thread.sleep(500);
@@ -87,6 +87,7 @@ public class bmgProcess
 				
 				bmgMainGUI.table.refresh();
 			}
+			
 			//check if the process is done executing
 			if (remainingTime <= 0)
 			{

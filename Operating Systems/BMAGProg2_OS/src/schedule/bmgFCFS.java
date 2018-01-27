@@ -66,7 +66,7 @@ public class bmgFCFS extends bmgAlgorithm
 			if (processes.peek().getArrivalTime() <= bmgSimulationTimer.getTimer().getValue())
 			{
 				//move the next process in the process queue to the ready queue
-				readyQueue.add(processes.poll()); 
+				readyQueue.add(processes.poll());
 			}
 		}
 	}
