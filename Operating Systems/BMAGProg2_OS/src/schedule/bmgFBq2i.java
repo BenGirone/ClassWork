@@ -112,7 +112,7 @@ public class bmgFBq2i extends bmgAlgorithm
 			
 			//set the current process to the next process in the ready queue
 			currentProcess = readyQueue.poll();
-			q = new bmgTimeQuantum((int) Math.pow(2, readyQueue.currentRQ));
+			q = new bmgTimeQuantum((int) Math.pow(2, readyQueue.getCurrentRQi()));
 		}
 		else //ready queue is empty
 		{
