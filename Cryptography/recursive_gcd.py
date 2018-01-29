@@ -6,21 +6,25 @@ def gcd(a,b):
         r = a % b
         return gcd(b,r)
 
-print(gcd(1428,969)) # Answer: 3288
+print(gcd(1428,969))
+#gcd(1428, 969) = gcd(969, 459) = gcd(459, 51) = gcd(51, 0) = 51
 
 def extended_gcd(a,b):
-    s,t = 0,1
-    old_s,old_t = 1,0
-    r,old_r = b,a
+    s,t = 1,0
+    x,y = 0,1
+    q,r = divmod(a,b)
 
     while (r != 0):
-        q = old_r//r
-        old_r,r = r,(old_r - q * r)
-        old_s,s = s,(old_s - s * s)
-        old_t,t = t,(old_t - q * t)
+        a,b = b,r
+        x_,y_ = x,y
+        x,y = s - q*x, t - q*y
+        s,t = x_,y_
+        q,r = divmod(a,b)
 
-    print("old_s = " + str(old_s) + " old_t = " + str(old_t) + "\n"
-          "old_r = " + str(old_r) + "\n"
-          "t = " + str(t) + " s = " + str(s))
-
-extended_gcd(1428,969)
+    return [b, x, y]
+    
+answer = extended_gcd(1428,969)
+print("gcd(1428,969) = " + str(answer[0]) +
+      " = 1428(" + str(answer[1]) +
+      ") + 969(" + str(answer[2]) + ")")
+#gcd(1428,969) = 51 = 1428(-2) + 969(3)
