@@ -1,0 +1,30 @@
+//Linux CLI
+lein new app myAppName //makes a new project
+
+//REPL
+(-function) //runs that function in REPL
+
+Keybindings
+
+Evaluate in REPL:
+	ctrl+,, s Selection
+	ctrl+,, f File
+	ctrl+,, l Lines
+	ctrl+,, b Block
+
+Transfer in REPL (just copy, without evaluating it):
+	ctrl+shift+,, s Selection
+	ctrl+shift+,, f File
+	ctrl+shift+,, l Lines
+	ctrl+shift+,, b Block
+
+Note: ctrl+,, f means: press Ctrl and Comma, release all, press F.
+
+use if
+use do
+use when
+define a no parameter function
+define a one parameter function
+define a multi-arity function can take any number of parameters
+define a function with at least 2 default values
+define a function with a variable parameter list
