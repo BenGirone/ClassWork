@@ -1,5 +1,6 @@
 //Linux CLI
 lein new app myAppName //makes a new project
+lein run //if run in the project directory, project runs.
 
 //REPL
 (-function) //runs that function in REPL
