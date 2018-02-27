@@ -13,4 +13,4 @@
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
-  (loopTest [ [1 2 3] [4 6] [9] [1 2 3 4 5] ]))
+  (set (loopTest [ [1 2 3] [4 6] [9] [1 2 3 4 5] ])))
