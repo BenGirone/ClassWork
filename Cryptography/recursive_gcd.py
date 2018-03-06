@@ -6,7 +6,7 @@ def gcd(a,b):
         r = a % b
         return gcd(b,r)
 
-print(gcd(1428,969))
+print(gcd(3127,7282))
 #gcd(1428, 969) = gcd(969, 459) = gcd(459, 51) = gcd(51, 0) = 51
 
 def extended_gcd(a,b):
@@ -23,7 +23,7 @@ def extended_gcd(a,b):
 
     return [b, x, y]
     
-answer = extended_gcd(1428,969)
+answer = extended_gcd(3127,7282)
 print("gcd(1428,969) = " + str(answer[0]) +
       " = 1428(" + str(answer[1]) +
       ") + 969(" + str(answer[2]) + ")")
