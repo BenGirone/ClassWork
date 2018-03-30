@@ -10,27 +10,20 @@ using System.Windows.Forms;
 using System.Numerics;
 using System.Security.Cryptography;
 
-namespace ElGamal
+namespace ElGamalClient
 {
     public partial class Form1 : Form
     {
         public Form1()
         {
             InitializeComponent();
-            plainText.Text = "Number : Is Prime\n";
+            plainText.Text = "Number : Is Prime\n"; 
         }
 
         private void btn_encrypt_Click(object sender, EventArgs e)
         {
-            while (true)
-            {
-                BigInteger candidate = BigPrimes.RandomPrimeCandidate(128 * 5);
-                if (BigPrimes.IsProbablePrime(candidate, 20))
-                {
-                    plainText.Text += candidate.ToString() + " : " + BigPrimes.IsProbablePrime(candidate, 20).ToString() + "\n";
-                    break;
-                }
-            }
+            BigInteger candidate = BigPrimes.RandomPrimeCandidate(128);
+            plainText.Text += candidate.ToString() + " : " + BigPrimes.IsProbablePrime(candidate, 20).ToString() + "\n";
         }
 
         public string listToString(List<BigInteger> L)

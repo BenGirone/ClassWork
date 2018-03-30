@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ElGamal.Properties
+namespace ElGamalClient.Properties
 {
 
 

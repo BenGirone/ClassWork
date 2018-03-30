@@ -48,20 +48,15 @@ namespace ElGamalClient
                 p = BigInteger.ModPow(a, d, n);
                 //squarings = new List<BigInteger> { p };
 
-                for (int j = 0; j < s - 1; j++)
+                for (int j = 0; j < s; j++)
                 {
                     p = BigInteger.ModPow(p, 2, n);
                     //squarings.Add(p);
                 }
 
-                if (p.IsOne || p == n - 1)
-                    if (BigInteger.ModPow(p, 2, n) != 1)
-                        witnesses++;
-                else
+                if (!p.IsOne)
                     witnesses++;
             }
-
-            Console.WriteLine(witnesses/certainty);
 
             return witnesses/certainty < 0.75;
         }

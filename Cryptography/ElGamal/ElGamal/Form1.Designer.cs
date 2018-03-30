@@ -1,4 +1,4 @@
-﻿namespace ElGamal
+﻿namespace ElGamalClient
 {
     partial class Form1
     {
