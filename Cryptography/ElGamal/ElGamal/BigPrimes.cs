@@ -10,7 +10,7 @@ namespace ElGamalClient
 {
     class BigPrimes
     {
-        public static bool isPrime(BigInteger n)
+        public static bool IsPrime(BigInteger n)
         {
             int[] smallPrimes = { 2, 3, 5, 7 };
             foreach (int a in smallPrimes)
@@ -24,10 +24,8 @@ namespace ElGamalClient
 
         public static BigInteger RandomBigInteger(int length)
         {
-            length = (int)Math.Ceiling((double)length / 8.0);
-
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-            byte[] bytes = new byte[length];
+            byte[] bytes = new byte[(int)Math.Ceiling((double)length / 8.0)];
             rng.GetBytes(bytes);
 
             BigInteger p = new BigInteger(bytes);
@@ -35,7 +33,7 @@ namespace ElGamalClient
             return BigInteger.Abs(p);
         }
 
-        public static BigInteger getPrime(int length)
+        public static BigInteger[] GetSafePrime(int length)
         {
             BigInteger p;
 
@@ -45,8 +43,39 @@ namespace ElGamalClient
                 if (p.IsEven)
                     p -= 1;
 
-                if (isPrime(p))
-                    return p;
+                if (IsPrime(p))
+                    if (IsPrime(2 * p + 1))
+                        return new BigInteger[] { 2 * p + 1, p };
+                    
+            }
+        }
+
+        public static BigInteger GetPrime(int length)
+        {
+            BigInteger p;
+
+            while (true)
+            {
+                p = RandomBigInteger(length);
+                if (p.IsEven)
+                    p -= 1;
+
+                if (IsPrime(p))
+                        return p;
+
+            }
+        }
+
+        public static BigInteger GetPrimitiveFromSafePrime(BigInteger[] p)
+        {
+            BigInteger a;
+
+            while (true)
+            {
+                a = RandomBigInteger(p[0].ToByteArray().Length) % p[0];
+
+                if (BigInteger.ModPow(a, p[1], p[0]) != 1 && BigInteger.ModPow(a, 2, p[0]) != 1)
+                    return a;
             }
         }
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.IO;
 using System.Numerics;
 
@@ -12,12 +12,17 @@ namespace ElGamalClient
     {
         private string ip = "10.0.0.";
         private BigInteger p;
+        private BigInteger a;
 
 
         public FakeTCPClient()
         {
             this.ip += new Random().Next(2,999).ToString();
-            p = BigPrimes.getPrime(512);
+
+            BigInteger[] safe_p = BigPrimes.GetSafePrime(512);
+            p = safe_p[0];
+            a = BigPrimes.GetPrimitiveFromSafePrime(safe_p);
+
             Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/" + ip);
             Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/internet");
         }
@@ -25,24 +30,29 @@ namespace ElGamalClient
         public void TransmitMessage(string remoteAddress, string plainText)
         {
             string encodedText = Encode(plainText);
+            string encryptedText = Encrypt(plainText);
 
         }
 
-        private string encrypt(string encodedText)
+        private string Encrypt(string plainText)
         {
+            string encodedText = Encode(plainText);
 
+
+
+            return encodedText;
         }
 
         private string Encode(string plainText)
         {
-            var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
+            byte[] plainTextBytes = Encoding.Unicode.GetBytes(plainText);
             return Convert.ToBase64String(plainTextBytes);
         }
 
         private string Decode(string base64EncodedData)
         {
             var base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
-            return Encoding.UTF8.GetString(base64EncodedBytes);
+            return Encoding.Unicode.GetString(base64EncodedBytes);
         }
     }
 }

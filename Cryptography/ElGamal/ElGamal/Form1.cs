@@ -21,7 +21,8 @@ namespace ElGamalClient
 
         private void btn_encrypt_Click(object sender, EventArgs e)
         {
-        
+            //plainText.Text += BigPrimes.GetSafePrime(Convert.ToInt16(bitSize.Text))[0] + "\n";
+            plainText.Text += BigPrimes.GetPrime(Convert.ToInt16(bitSize.Text)) + "\n";
         }
     }
 }

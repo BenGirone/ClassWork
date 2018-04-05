@@ -30,6 +30,7 @@
         {
             this.plainText = new System.Windows.Forms.RichTextBox();
             this.btn_encrypt = new System.Windows.Forms.Button();
+            this.bitSize = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // plainText
@@ -50,16 +51,25 @@
             this.btn_encrypt.UseVisualStyleBackColor = true;
             this.btn_encrypt.Click += new System.EventHandler(this.btn_encrypt_Click);
             // 
+            // bitSize
+            // 
+            this.bitSize.Location = new System.Drawing.Point(13, 42);
+            this.bitSize.Name = "bitSize";
+            this.bitSize.Size = new System.Drawing.Size(74, 20);
+            this.bitSize.TabIndex = 2;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(820, 523);
+            this.Controls.Add(this.bitSize);
             this.Controls.Add(this.btn_encrypt);
             this.Controls.Add(this.plainText);
             this.Name = "Form1";
             this.Text = "El Gamal Messenger";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -67,6 +77,7 @@
 
         private System.Windows.Forms.RichTextBox plainText;
         private System.Windows.Forms.Button btn_encrypt;
+        private System.Windows.Forms.TextBox bitSize;
     }
 }
 
