@@ -10,60 +10,16 @@ namespace ElGamalClient
 {
     class BigPrimes
     {
-        /// <summary>
-        /// Generates a large random number with the specified amount of bits.
-        /// </summary>
-        /// <param name="length">Number of bits in the random number. Must be greater than 0.</param>
-        /// <returns>A randomly generated large odd number that is at least one byte in size</returns>
-        public static BigInteger RandomPrimeCandidate(int length)
+        public static bool isPrime(BigInteger n)
         {
-            BigInteger p = RandomBigInteger(length);
-
-            if (p.IsEven)
-                p += 1;
-
-            return p;
-        }
-
-        public static bool IsProbablePrime(BigInteger n, int certainty)
-        {
-            uint s = 0;
-            BigInteger d = n - 1;
-
-            while (d % 2 == 0)
+            int[] smallPrimes = { 2, 3, 5, 7 };
+            foreach (int a in smallPrimes)
             {
-                s++;
-                d = d / 2;
+                if (BigInteger.ModPow(a, n - 1, n) != 1)
+                    return false;
             }
 
-            int bitSize = n.ToByteArray().Length * 8;
-            //List<BigInteger> squarings;
-            BigInteger a;
-            BigInteger p;
-            int witnesses = 0;
-
-            for (int i = 0; i < certainty; i++)
-            {
-                a = RandomBigInteger(bitSize) % n;
-                p = BigInteger.ModPow(a, d, n);
-                //squarings = new List<BigInteger> { p };
-
-                for (int j = 0; j < s - 1; j++)
-                {
-                    p = BigInteger.ModPow(p, 2, n);
-                    //squarings.Add(p);
-                }
-
-                if (p.IsOne || p == n - 1)
-                    if (BigInteger.ModPow(p, 2, n) != 1)
-                        witnesses++;
-                else
-                    witnesses++;
-            }
-
-            Console.WriteLine(witnesses/certainty);
-
-            return witnesses/certainty < 0.75;
+            return true;
         }
 
         public static BigInteger RandomBigInteger(int length)
@@ -77,6 +33,21 @@ namespace ElGamalClient
             BigInteger p = new BigInteger(bytes);
 
             return BigInteger.Abs(p);
+        }
+
+        public static BigInteger getPrime(int length)
+        {
+            BigInteger p;
+
+            while (true)
+            {
+                p = RandomBigInteger(length);
+                if (p.IsEven)
+                    p -= 1;
+
+                if (isPrime(p))
+                    return p;
+            }
         }
     }
 }

@@ -22,8 +22,8 @@ namespace ElGamalClient
 
         private void btn_encrypt_Click(object sender, EventArgs e)
         {
-            BigInteger candidate = BigPrimes.RandomPrimeCandidate(128);
-            plainText.Text += candidate.ToString() + " : " + BigPrimes.IsProbablePrime(candidate, 20).ToString() + "\n";
+            BigInteger p = BigPrimes.getPrime(1028);
+            plainText.Text += p.ToString() + "\n";
         }
 
         public string listToString(List<BigInteger> L)

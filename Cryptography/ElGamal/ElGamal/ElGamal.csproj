@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="BigPrimes.cs" />
     <Compile Include="ElGamalClient.cs" />
+    <Compile Include="FakeTCPClient.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
