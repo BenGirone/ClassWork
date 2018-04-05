@@ -8,6 +8,8 @@ namespace ElGamalClient
 {
     static class Program
     {
+        public static FakeTCPClient localClient = new FakeTCPClient();
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -17,8 +19,6 @@ namespace ElGamalClient
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-
-            new FakeTCPClient();
         }
     }
 }

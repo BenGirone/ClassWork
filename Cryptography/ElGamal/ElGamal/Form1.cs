@@ -17,27 +17,11 @@ namespace ElGamalClient
         public Form1()
         {
             InitializeComponent();
-            plainText.Text = "Number : Is Prime\n"; 
         }
 
         private void btn_encrypt_Click(object sender, EventArgs e)
         {
-            BigInteger p = BigPrimes.getPrime(1028);
-            plainText.Text += p.ToString() + "\n";
-        }
-
-        public string listToString(List<BigInteger> L)
-        {
-            string s = "[";
-
-            for (int i = 0; i < L.Count - 1; i++)
-            {
-                s += L[i].ToString() + ", ";
-            }
-
-            s += L[L.Count - 1].ToString() + "]";
-
-            return s;
+        
         }
     }
 }
