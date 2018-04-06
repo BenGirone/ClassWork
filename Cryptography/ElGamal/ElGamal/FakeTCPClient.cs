@@ -12,6 +12,7 @@ namespace ElGamalClient
     {
         private string ip = "10.0.0.";
         private BigInteger p;
+        private BigInteger alpha;
         private BigInteger a;
 
 
@@ -19,28 +20,55 @@ namespace ElGamalClient
         {
             this.ip += new Random().Next(2,999).ToString();
 
-            BigInteger[] safe_p = BigPrimes.GetSafePrime(512);
+            BigInteger[] safe_p = BigPrimes.GetSafePrime(128);
             p = safe_p[0];
-            a = BigPrimes.GetPrimitiveFromSafePrime(safe_p);
+            alpha = BigPrimes.GetPrimitiveFromSafePrime(safe_p);
+            a = BigPrimes.RandomBigInteger(128) % p;
 
             Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/" + ip);
             Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/internet");
+
+            ExposePublicKey();
+        }
+
+        private void ExposePublicKey()
+        {
+            // Delete the file if it exists.
+            if (File.Exists(Directory.GetCurrentDirectory() + "/" + ip + "/publickey"))
+                File.Delete(Directory.GetCurrentDirectory() + "/" + ip + "/publickey");
+            
+            // Create the file.
+            using (FileStream fs = File.Create(Directory.GetCurrentDirectory() + "/" + ip + "/publickey"))
+            {
+                Byte[] key = new UTF8Encoding(true).GetBytes(p.ToString() + "," + alpha.ToString() + "," + BigInteger.ModPow(alpha, a, p).ToString());
+                
+                // Add key.
+                fs.Write(key, 0, key.Length);
+            }
+        }
+
+        public BigInteger[] ReadRemoteKey(string remoteAddress)
+        {
+            // Open the stream and read
+            using (StreamReader sr = File.OpenText(Directory.GetCurrentDirectory() + "/" + remoteAddress + "/publickey"))
+            {
+                string[] s = sr.ReadLine().Split(',');
+                return new BigInteger[] { BigInteger.Parse(s[0]), BigInteger.Parse(s[1]), BigInteger.Parse(s[2]) }; 
+            }
         }
 
         public void TransmitMessage(string remoteAddress, string plainText)
         {
-            string encodedText = Encode(plainText);
-            string encryptedText = Encrypt(plainText);
+            BigInteger[] remotePublicKey = ReadRemoteKey(remoteAddress);
+            
+            string cipherText = Encrypt(Encode(plainText));
+
 
         }
 
         private string Encrypt(string plainText)
         {
-            string encodedText = Encode(plainText);
-
-
-
-            return encodedText;
+            
         }
 
         private string Encode(string plainText)

@@ -36,6 +36,7 @@ namespace ElGamalClient
         public static BigInteger[] GetSafePrime(int length)
         {
             BigInteger p;
+            BigInteger q;
 
             while (true)
             {
@@ -47,22 +48,6 @@ namespace ElGamalClient
                     if (IsPrime(2 * p + 1))
                         return new BigInteger[] { 2 * p + 1, p };
                     
-            }
-        }
-
-        public static BigInteger GetPrime(int length)
-        {
-            BigInteger p;
-
-            while (true)
-            {
-                p = RandomBigInteger(length);
-                if (p.IsEven)
-                    p -= 1;
-
-                if (IsPrime(p))
-                        return p;
-
             }
         }
 
