@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using System.Numerics;
 using System.Security.Cryptography;
@@ -14,17 +14,16 @@ namespace ElGamalClient
 {
     public partial class Form1 : Form
     {
+        FakeTCPClient localClient;
+
         public Form1()
         {
             InitializeComponent();
-        }
 
-        private void btn_encrypt_Click(object sender, EventArgs e)
-        {
-            //plainText.Text += BigPrimes.GetSafePrime(Convert.ToInt16(bitSize.Text))[0] + "\n";
-            //plainText.Text += BigPrimes.GetPrime(Convert.ToInt16(bitSize.Text)) + "\n";
+            localClient = new FakeTCPClient(512);
 
-            plainText.Text += Program.localClient.ReadRemoteKey(bitSize.Text)[0].ToString() + "\n";
+            output.Text = "Generating public key...";
+            output.Text += "\nKey generated. Ready to receive messages.";
         }
     }
 }

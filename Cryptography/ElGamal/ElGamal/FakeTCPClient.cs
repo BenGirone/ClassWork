@@ -14,21 +14,31 @@ namespace ElGamalClient
         private BigInteger p;
         private BigInteger alpha;
         private BigInteger a;
+        private int encryptionLevel;
+        public bool Ready = false;
 
-
-        public FakeTCPClient()
+        public FakeTCPClient(int encryptionLevel)
         {
             this.ip += new Random().Next(2,999).ToString();
+            this.encryptionLevel = encryptionLevel;
 
-            BigInteger[] safe_p = BigPrimes.GetSafePrime(128);
+            Thread primeThread = new Thread(CreatePublicKey);
+            primeThread.Start();
+        }
+
+        private void CreatePublicKey()
+        {
+            BigInteger[] safe_p = BigPrimes.GetSafePrime(BigInteger.Pow(2, encryptionLevel));
             p = safe_p[0];
             alpha = BigPrimes.GetPrimitiveFromSafePrime(safe_p);
-            a = BigPrimes.RandomBigInteger(128) % p;
+            a = BigPrimes.RandomBigInteger(p);
 
             Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/" + ip);
             Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/internet");
 
             ExposePublicKey();
+
+            Ready = true;
         }
 
         private void ExposePublicKey()
@@ -62,13 +72,11 @@ namespace ElGamalClient
             BigInteger[] remotePublicKey = ReadRemoteKey(remoteAddress);
             
             string cipherText = Encrypt(Encode(plainText));
-
-
         }
 
         private string Encrypt(string plainText)
         {
-            
+            return plainText;
         }
 
         private string Encode(string plainText)

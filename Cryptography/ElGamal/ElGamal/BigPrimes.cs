@@ -22,31 +22,39 @@ namespace ElGamalClient
             return true;
         }
 
-        public static BigInteger RandomBigInteger(int length)
+        public static BigInteger RandomBigInteger(BigInteger max)
         {
+            int length = max.ToByteArray().Length * 8;
+
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
             byte[] bytes = new byte[(int)Math.Ceiling((double)length / 8.0)];
-            rng.GetBytes(bytes);
 
-            BigInteger p = new BigInteger(bytes);
+            BigInteger p;
+            do
+            {
+                rng.GetBytes(bytes);
+                p = BigInteger.Abs(new BigInteger(bytes));
+            } while (p >= max);
 
-            return BigInteger.Abs(p);
+            return p;
         }
 
-        public static BigInteger[] GetSafePrime(int length)
+        public static BigInteger[] GetSafePrime(BigInteger max)
         {
+            BigInteger n = max / 12;
+
             BigInteger p;
             BigInteger q;
 
             while (true)
             {
-                p = RandomBigInteger(length);
-                if (p.IsEven)
-                    p -= 1;
-
-                if (IsPrime(p))
-                    if (IsPrime(2 * p + 1))
-                        return new BigInteger[] { 2 * p + 1, p };
+                q = 6 * RandomBigInteger(n) + 5;
+                if (IsPrime(q))
+                {
+                    p = 2 * q + 1;
+                    if (IsPrime(p))
+                        return new BigInteger[] { p, q };
+                }
                     
             }
         }

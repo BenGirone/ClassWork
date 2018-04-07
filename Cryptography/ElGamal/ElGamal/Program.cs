@@ -8,8 +8,6 @@ namespace ElGamalClient
 {
     static class Program
     {
-        public static FakeTCPClient localClient = new FakeTCPClient();
-
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
