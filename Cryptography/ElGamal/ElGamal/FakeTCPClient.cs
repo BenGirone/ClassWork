@@ -15,18 +15,14 @@ namespace ElGamalClient
         private BigInteger alpha;
         private BigInteger a;
         private int encryptionLevel;
-        public bool Ready = false;
 
         public FakeTCPClient(int encryptionLevel)
         {
             this.ip += new Random().Next(2,999).ToString();
             this.encryptionLevel = encryptionLevel;
-
-            Thread primeThread = new Thread(CreatePublicKey);
-            primeThread.Start();
         }
 
-        private void CreatePublicKey()
+        public void CreatePublicKey()
         {
             BigInteger[] safe_p = BigPrimes.GetSafePrime(BigInteger.Pow(2, encryptionLevel));
             p = safe_p[0];
@@ -34,11 +30,22 @@ namespace ElGamalClient
             a = BigPrimes.RandomBigInteger(p);
 
             Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/" + ip);
+            ClearFolder();
+
             Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/internet");
 
             ExposePublicKey();
+        }
 
-            Ready = true;
+        //https://stackoverflow.com/questions/1288718/how-to-delete-all-files-and-folders-in-a-directory?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+        private void ClearFolder()
+        {
+            DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "/" + ip);
+
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
         }
 
         private void ExposePublicKey()

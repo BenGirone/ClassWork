@@ -54,6 +54,7 @@
             this.sendMessage.TabIndex = 1;
             this.sendMessage.Text = "Send Message";
             this.sendMessage.UseVisualStyleBackColor = true;
+            this.sendMessage.Click += new System.EventHandler(this.sendMessage_Click);
             // 
             // remoteIP
             // 
@@ -78,6 +79,7 @@
             this.output.ForeColor = System.Drawing.SystemColors.Window;
             this.output.Location = new System.Drawing.Point(127, 399);
             this.output.Name = "output";
+            this.output.ReadOnly = true;
             this.output.Size = new System.Drawing.Size(665, 112);
             this.output.TabIndex = 4;
             this.output.Text = "";
@@ -108,6 +110,7 @@
             this.readMessage.TabIndex = 7;
             this.readMessage.Text = "Read a Message";
             this.readMessage.UseVisualStyleBackColor = true;
+            this.readMessage.Click += new System.EventHandler(this.readMessage_Click);
             // 
             // Form1
             // 

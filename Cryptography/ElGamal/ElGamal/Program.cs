@@ -16,7 +16,11 @@ namespace ElGamalClient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            Form1 mainWindow = new Form1();
+            Controller controller = new Controller(mainWindow, 512);
+
+            Application.Run(mainWindow);
         }
     }
 }
