@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Numerics;
 using System.Security.Cryptography;
 
-namespace ElGamalClient
+namespace ElGamal
 {
     class BigPrimes
     {

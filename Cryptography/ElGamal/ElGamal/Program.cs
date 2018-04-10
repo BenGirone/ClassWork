@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ElGamalClient
+namespace ElGamal
 {
     static class Program
     {
+
+        public static Controller controller;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -18,7 +20,7 @@ namespace ElGamalClient
             Application.SetCompatibleTextRenderingDefault(false);
 
             Form1 mainWindow = new Form1();
-            Controller controller = new Controller(mainWindow, 512);
+            controller = new Controller(mainWindow, 512);
 
             Application.Run(mainWindow);
         }

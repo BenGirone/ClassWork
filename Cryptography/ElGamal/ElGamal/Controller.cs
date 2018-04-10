@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace ElGamalClient
+namespace ElGamal
 {
     public class Controller
     {
@@ -20,6 +20,16 @@ namespace ElGamalClient
             Thread keyThread = new Thread(GeneratePublicKey);
             keyThread.Start();
         }
+
+        public void SendMessage(string s, string remoteIP)
+        {
+
+        }
+
+        //public string GetLocalAddress()
+        //{
+
+        //}
 
         private void GeneratePublicKey()
         {

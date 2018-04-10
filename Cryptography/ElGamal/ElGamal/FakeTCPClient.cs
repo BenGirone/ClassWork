@@ -6,41 +6,28 @@ using System.Threading;
 using System.IO;
 using System.Numerics;
 
-namespace ElGamalClient
+namespace ElGamal
 {
     public class FakeTCPClient
     {
         private string ip = "10.0.0.";
-        private BigInteger p;
-        private BigInteger alpha;
-        private BigInteger a;
-        private int encryptionLevel;
+        private string currentDirectory = string.Empty;
 
-        public FakeTCPClient(int encryptionLevel)
+        public FakeTCPClient()
         {
-            this.ip += new Random().Next(2,999).ToString();
-            this.encryptionLevel = encryptionLevel;
-        }
+            ip += new Random().Next(2,999).ToString();
+            currentDirectory = Directory.GetCurrentDirectory();
 
-        public void CreatePublicKey()
-        {
-            BigInteger[] safe_p = BigPrimes.GetSafePrime(BigInteger.Pow(2, encryptionLevel));
-            p = safe_p[0];
-            alpha = BigPrimes.GetPrimitiveFromSafePrime(safe_p);
-            a = BigPrimes.RandomBigInteger(p);
-
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/" + ip);
+            Directory.CreateDirectory(currentDirectory + "/" + ip);
             ClearFolder();
 
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/internet");
-
-            ExposePublicKey();
+            Directory.CreateDirectory(currentDirectory + "/internet");
         }
 
         //https://stackoverflow.com/questions/1288718/how-to-delete-all-files-and-folders-in-a-directory?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
         private void ClearFolder()
         {
-            DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "/" + ip);
+            DirectoryInfo di = new DirectoryInfo(currentDirectory + "/" + ip);
 
             foreach (FileInfo file in di.GetFiles())
             {
@@ -48,54 +35,23 @@ namespace ElGamalClient
             }
         }
 
-        private void ExposePublicKey()
+        private void ExposeFile(string fileName, string fileText)
         {
             // Delete the file if it exists.
-            if (File.Exists(Directory.GetCurrentDirectory() + "/" + ip + "/publickey"))
-                File.Delete(Directory.GetCurrentDirectory() + "/" + ip + "/publickey");
-            
-            // Create the file.
-            using (FileStream fs = File.Create(Directory.GetCurrentDirectory() + "/" + ip + "/publickey"))
-            {
-                Byte[] key = new UTF8Encoding(true).GetBytes(p.ToString() + "," + alpha.ToString() + "," + BigInteger.ModPow(alpha, a, p).ToString());
-                
-                // Add key.
-                fs.Write(key, 0, key.Length);
-            }
+            if (File.Exists(currentDirectory + "/" + ip + "/"  + fileName))
+                File.Delete(currentDirectory + "/" + ip + "/" + fileName);
+
+            File.WriteAllText(currentDirectory + "/" + ip + "/" + fileName, fileText);
         }
 
-        public BigInteger[] ReadRemoteKey(string remoteAddress)
+        public string RetrieveFile(string remoteAddress, string fileName)
         {
-            // Open the stream and read
-            using (StreamReader sr = File.OpenText(Directory.GetCurrentDirectory() + "/" + remoteAddress + "/publickey"))
-            {
-                string[] s = sr.ReadLine().Split(',');
-                return new BigInteger[] { BigInteger.Parse(s[0]), BigInteger.Parse(s[1]), BigInteger.Parse(s[2]) }; 
-            }
+            return File.ReadAllText(currentDirectory + "/" + remoteAddress + "/" + fileName);
         }
 
-        public void TransmitMessage(string remoteAddress, string plainText)
+        public void Transmit(string remoteAddress, string fileName, string fileText)
         {
-            BigInteger[] remotePublicKey = ReadRemoteKey(remoteAddress);
-            
-            string cipherText = Encrypt(Encode(plainText));
-        }
-
-        private string Encrypt(string plainText)
-        {
-            return plainText;
-        }
-
-        private string Encode(string plainText)
-        {
-            byte[] plainTextBytes = Encoding.Unicode.GetBytes(plainText);
-            return Convert.ToBase64String(plainTextBytes);
-        }
-
-        private string Decode(string base64EncodedData)
-        {
-            var base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
-            return Encoding.Unicode.GetString(base64EncodedBytes);
+            ExposeFile(fileName, fileText);
         }
     }
 }
