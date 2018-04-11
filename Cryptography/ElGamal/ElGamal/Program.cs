@@ -8,8 +8,8 @@ namespace ElGamal
 {
     static class Program
     {
-
         public static Controller controller;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

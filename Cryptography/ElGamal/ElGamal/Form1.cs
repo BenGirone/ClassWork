@@ -32,19 +32,12 @@ namespace ElGamal
 
         private void sendMessage_Click(object sender, EventArgs e)
         {
-            if (remoteIP.Text.StartsWith("1") && Directory.Exists((Directory.GetCurrentDirectory() + "/" + remoteIP.Text)))
-            {
-                
-            }
-            else
-            {
-                MessageBox.Show("Cannot connect to the remote IP provided.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            Program.controller.SendMessage(plainText.Text, remoteIP.Text);
         }
 
         private void readMessage_Click(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
