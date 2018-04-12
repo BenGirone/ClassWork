@@ -13,7 +13,6 @@ namespace ElGamal
         private BigInteger p;
         private BigInteger alpha;
         private BigInteger a;
-        private BigInteger alpha_a;
         private int encryptionLevel;
 
         public ElGamalClient(int encryptionLevel)
@@ -21,23 +20,27 @@ namespace ElGamal
             this.encryptionLevel = encryptionLevel;
         }
 
-        public void CreatePublicKey()
+        public BigInteger[] CreatePublicKey()
         {
             BigInteger[] safe_p = BigPrimes.GetSafePrime(BigInteger.Pow(2, encryptionLevel));
             p = safe_p[0];
             alpha = BigPrimes.GetPrimitiveFromSafePrime(safe_p);
             a = BigPrimes.RandomBigInteger(p);
+            BigInteger alpha_a = BigInteger.ModPow(alpha, a, p);
+
+            return new BigInteger[] { p, alpha, alpha_a };
         }
 
-        public string Encrypt(string plainText, BigInteger alpha_a, BigInteger a, BigInteger p)
+        public string Encrypt(string plainText, BigInteger p, BigInteger alpha, BigInteger alpha_a)
         {
             int blockSize = p.ToByteArray().Length - 1;
 
             List<byte> plainTextBytes = Encoding.BigEndianUnicode.GetBytes(plainText).ToList();
 
             BigInteger b = BigPrimes.RandomBigInteger(p);
+            BigInteger alpha_b = BigInteger.ModPow(alpha, b, p);
 
-            string cipherText = "";
+            string cipherText = alpha_b.ToString() + ",";
             BigInteger block;
             BigInteger alpha_ab = BigInteger.ModPow(alpha_a, b, p);
 

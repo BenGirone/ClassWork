@@ -35,9 +35,23 @@ namespace ElGamal
             Program.controller.SendMessage(plainText.Text, remoteIP.Text);
         }
 
+        //https://stackoverflow.com/questions/16136383/
         private void readMessage_Click(object sender, EventArgs e)
         {
-            
+            OpenFileDialog theDialog = new OpenFileDialog();
+            theDialog.Title = "Open Encrypted File";
+            theDialog.Filter = "Encrypted files|*.elgamal";
+            theDialog.InitialDirectory = Program.controller.GetInbox();
+            if (theDialog.ShowDialog() == DialogResult.OK)
+            {
+                string[] fullPath = theDialog.FileName.ToString().Split('\\');
+                Program.controller.OpenMessage(fullPath[fullPath.Length - 1]);
+            }
+        }
+
+        internal void DisplayMessage(string plainText)
+        {
+            throw new NotImplementedException();
         }
     }
 }

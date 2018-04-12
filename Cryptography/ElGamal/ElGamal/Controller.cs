@@ -37,7 +37,7 @@ namespace ElGamal
                 messageText = localClient.Encrypt(messageText, BigInteger.Parse(publicKeyContents[0]), BigInteger.Parse(publicKeyContents[1]), BigInteger.Parse(publicKeyContents[2]));
 
                 mainWindow.ConsoleWrite("Transmitting message");
-                localHost.Transmit(remoteIP, "Message", messageText);
+                localHost.Transmit(remoteIP, "From - " + localHost.LocalAddress + ".elgamal", messageText);
 
                 mainWindow.ConsoleWrite("Done");
             }
@@ -47,10 +47,30 @@ namespace ElGamal
             }
         }
 
+        public void OpenMessage(string fileName)
+        {
+            mainWindow.ConsoleWrite("Opening message");
+            string rawMessage = localHost.RetrieveFile(localHost.LocalAddress, fileName);
+            string[] messageContents = rawMessage.Split(',');
+
+            string plainText = localClient.Decrypt(BigInteger.Parse(messageContents[0]), messageContents[1]);
+
+            mainWindow.DisplayMessage(plainText);
+            mainWindow.ConsoleWrite("done");
+
+        }
+
+        public string GetInbox()
+        {
+            return localHost.LocalDirectory;
+        }
+
         private void GeneratePublicKey()
         {
-            localClient.CreatePublicKey();
-            mainWindow.ConsoleWrite("Ready");
+            BigInteger[] key = localClient.CreatePublicKey();
+            localHost.ExposeFile("publickey", key[0].ToString() + " " + key[1].ToString() + " " + key[2].ToString());
+
+            mainWindow.ConsoleWrite("Key Ready");
         }
     }
 }

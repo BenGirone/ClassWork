@@ -20,7 +20,7 @@ namespace ElGamal
             Application.SetCompatibleTextRenderingDefault(false);
 
             Form1 mainWindow = new Form1();
-            controller = new Controller(mainWindow, 512);
+            controller = new Controller(mainWindow, 256);
 
             Application.Run(mainWindow);
         }

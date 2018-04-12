@@ -13,6 +13,9 @@ namespace ElGamal
         private string ip = "10.0.0.";
         private string currentDirectory = string.Empty;
 
+        public string LocalAddress { get { return ip; } }
+        public string LocalDirectory { get { return currentDirectory + "/" + ip; } }
+
         public FakeTCPClient()
         {
             ip += new Random().Next(2,999).ToString();
@@ -67,7 +70,12 @@ namespace ElGamal
             transmissionData data = (transmissionData)threadData;
             File.Move(currentDirectory + "/" + ip + "/" + data.fileName, currentDirectory + "/internet/" + data.fileName + " - in transmission");
             Thread.Sleep(1000);
-            File.Move(currentDirectory + "/internet/" + data.fileName + " - in transmission", currentDirectory + "/" + data.remoteAddress + "/" + "From " + ip + ":" + data.fileName);
+            File.Move(currentDirectory + "/internet/" + data.fileName + " - in transmission", currentDirectory + "/" + data.remoteAddress + "/" + data.fileName);
+        }
+
+        ~FakeTCPClient()
+        {
+            Directory.Delete(currentDirectory + "/" + ip, true);
         }
     }
 
