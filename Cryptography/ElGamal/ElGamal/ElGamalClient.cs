@@ -35,7 +35,7 @@ namespace ElGamal
         {
             int blockSize = p.ToByteArray().Length - 1;
 
-            List<byte> plainTextBytes = Encoding.BigEndianUnicode.GetBytes(plainText).ToList();
+            List<byte> plainTextBytes = Encoding.UTF8.GetBytes(plainText).ToList();
 
             BigInteger b = BigPrimes.RandomBigInteger(p);
             BigInteger alpha_b = BigInteger.ModPow(alpha, b, p);
@@ -51,7 +51,7 @@ namespace ElGamal
 
                 i += blockSize;
 
-                block *= alpha_ab % p;
+                block = (block * alpha_ab) % p;
 
                 cipherText += block.ToString() + " ";
             }
@@ -59,6 +59,8 @@ namespace ElGamal
             if (i < plainTextBytes.Count - 1)
             {
                 block = new BigInteger(plainTextBytes.GetRange(i, plainTextBytes.Count - i).ToArray());
+
+                block = (block * alpha_ab) % p;
 
                 cipherText += block.ToString() + " ";
             }
@@ -70,7 +72,7 @@ namespace ElGamal
         {
             string[] cipherBlocks = cipherText.Split(' ');
 
-            BigInteger alpha_ab_inv = BigInteger.ModPow(alpha_b, p - 1 - a, p);
+            BigInteger alpha_ab_inv = BigInteger.ModPow(alpha_b, (p - 1) - a, p);
             BigInteger block;
 
             string plainText = "";
@@ -78,9 +80,9 @@ namespace ElGamal
             {
                 block = BigInteger.Parse(cipherBlocks[i]);
 
-                block *= alpha_ab_inv % p;
+                block = (block * alpha_ab_inv) % p;
 
-                plainText += Encoding.BigEndianUnicode.GetString(block.ToByteArray());
+                plainText += Encoding.UTF8.GetString(block.ToByteArray());
             }
 
             return plainText;

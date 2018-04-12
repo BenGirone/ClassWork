@@ -11,7 +11,7 @@ namespace Tests
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Decrypt(Encrypt("")));
+            Console.WriteLine(Decrypt(Encrypt("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pharetra, sem eget imperdiet pellentesque, sapien odio congue sapien, ut tincidunt erat urna vitae eros. Morbi convallis libero sed tellus mattis porttitor. Nullam id odio maximus purus pretium finibus non nec tortor. Nullam quis orci a leo iaculis iaculis. Ut non urna quis elit posuere feugiat suscipit id augue. Maecenas aliquet pellentesque ante sed faucibus. Aliquam non dignissim massa. Proin fringilla erat tortor, in vehicula odio blandit vitae. Nam sed sapien ullamcorper, ullamcorper orci at, rhoncus orci. Morbi sodales efficitur massa, vitae lacinia nisi eleifend vel. Sed ante leo, semper et luctus ac, tincidunt vel justo.")));
             Console.ReadLine();
         }
 

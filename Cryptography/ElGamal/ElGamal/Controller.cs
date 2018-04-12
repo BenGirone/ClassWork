@@ -19,6 +19,7 @@ namespace ElGamal
             this.localClient = new ElGamalClient(encryptionLevel);
             this.localHost = new FakeTCPClient();
 
+            this.mainWindow.ConsoleWrite("Starting TCP client on " + this.localHost.LocalAddress);
             this.mainWindow.ConsoleWrite("Generating public key...");
             Thread keyThread = new Thread(GeneratePublicKey);
             keyThread.Start();

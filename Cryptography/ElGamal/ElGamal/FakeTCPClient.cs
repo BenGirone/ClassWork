@@ -14,7 +14,7 @@ namespace ElGamal
         private string currentDirectory = string.Empty;
 
         public string LocalAddress { get { return ip; } }
-        public string LocalDirectory { get { return currentDirectory + "/" + ip; } }
+        public string LocalDirectory { get { return currentDirectory + "\\" + ip; } }
 
         public FakeTCPClient()
         {

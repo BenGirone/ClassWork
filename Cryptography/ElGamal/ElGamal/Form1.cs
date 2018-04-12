@@ -49,9 +49,9 @@ namespace ElGamal
             }
         }
 
-        internal void DisplayMessage(string plainText)
+        internal void DisplayMessage(string message)
         {
-            throw new NotImplementedException();
+            this.plainText.Text = message;
         }
     }
 }
