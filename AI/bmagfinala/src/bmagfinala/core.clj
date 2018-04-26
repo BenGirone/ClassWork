@@ -1,3 +1,6 @@
+;;Ben Girone	CSC 410		4/20/18
+;;This program uses breadth-first search to find paths between cities in Romania
+
 (ns bmagfinala.core
   (:gen-class))
 
@@ -25,15 +28,13 @@
 		:Eforie {:Hirsova 86}
 	})
 
-(defn parent-map
-	[parent-map parent]
-	(concat parent-map (map #(hash-map % parent) (keys (parent Romania)))))
-
 (defn queue-keys
+	"Retrieves the keys from a queue"
 	[queue]
 	(reduce #(concat (keys %2) %1) [] queue))
 
 (defn queue-from-map
+	"Builds a queue (vector) from a map"
 	[mapping]
 	(into [] (map #(into {} [%]) (into [] mapping))))
 
@@ -43,17 +44,17 @@
 	(into [] (concat queue (remove #(some #{(first (keys %))} (concat explored (queue-keys queue))) push))))
 
 (defn breadth-first-search
+	"An implementation of the breadth-first search algorithm"
 	[start-city goal-city]
 	(loop [
 		frontier (queue-from-map (Romania start-city)) 
 		explored [] 
 		current-node start-city
-		cost 0
-		path-data {start-city 0}]
+		path-data {start-city 0}] ;;Meta data to construct a path when search completes. (A mapping of children to parents)
 		
-		(if (empty? frontier) ("no path"))
+		(if (nil? current-node) (do (println "no path") [start-city]))
 		(if (= current-node goal-city)
-			(loop [path-node current-node result-path [current-node]]
+			(loop [path-node current-node result-path [current-node]] ;;Loop to reconstruct the path.
 				(if (= (path-data path-node) 0)
 					result-path
 					(recur (path-data path-node) (into [] (concat [(path-data path-node)] result-path)))))
@@ -61,16 +62,15 @@
 				(queue-push (rest frontier) (queue-from-map ((first (keys (first frontier))) Romania)) (concat explored [current-node]))
 				(into [] (concat explored [current-node]))
 				(first (keys (first frontier)))
-				(+ ((first (keys (first frontier))) (first frontier)) cost)
 				(reduce #(if (not (contains? %1 %2)) (assoc %1 %2 current-node) %1) path-data (keys (current-node Romania)))))))
 
 (defn -main
   "Test the breadth-first search algorithm."
   [& args]
   (println "Cities: ")
-  (println (clojure.string/join ", " (map name (keys Romania))))
-  (println "Enter a start city and goal city (separated by a space): ")
+  (println (clojure.string/join "\n" (map name (keys Romania))))
+  (println "Enter a start city and goal city (separated by a space. e.g. \"Arad Bucharest\"):")
   (try
-     (println (apply breadth-first-search (map keyword (clojure.string/split (read-line) #" "))))
-     (catch Exception e (println "There was an error with your input. Defaulting to \"Arad Bucharest\" " (str (breadth-first-search :Arad :Bucharest))))))
+     (println (clojure.string/join " --> " (map name (apply breadth-first-search (map keyword (clojure.string/split (read-line) #" "))))))
+     (catch Exception e (println "There was a typo in your input.\nDefaulting to \"Arad Bucharest\"\n" (str (clojure.string/join " --> " (map name (breadth-first-search :Arad :Bucharest))))))))
   
