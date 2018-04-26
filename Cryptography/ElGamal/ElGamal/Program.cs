@@ -19,9 +19,11 @@ namespace ElGamal
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            //Create the controller with a UI window and encryption level (bits)
             Form1 mainWindow = new Form1();
             controller = new Controller(mainWindow, 256);
 
+            //Display the window
             Application.Run(mainWindow);
         }
     }
