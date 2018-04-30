@@ -25,6 +25,11 @@ namespace ElGamal
             keyThread.Start();
         }
 
+        /// <summary>
+        /// Takes a message from the view and encrypts it before sending it to another client. 
+        /// </summary>
+        /// <param name="messageText">The content of the message to be sent.</param>
+        /// <param name="remoteIP">The IP address of the remote endpoint.</param>
         public void SendMessage(string messageText, string remoteIP)
         {
             mainWindow.ConsoleWrite("Attempting to connect to " + remoteIP);
@@ -48,6 +53,10 @@ namespace ElGamal
             }
         }
 
+        /// <summary>
+        /// Reads a message from a file and sends it to the view.
+        /// </summary>
+        /// <param name="fileName">The name of the file to be read.</param>
         public void OpenMessage(string fileName)
         {
             mainWindow.ConsoleWrite("Opening message");
@@ -61,11 +70,18 @@ namespace ElGamal
 
         }
 
+        /// <summary>
+        /// Gets the folder were inbound messages are stored
+        /// </summary>
+        /// <returns>A string that holds the address of the folder.</returns>
         public string GetInbox()
         {
             return localHost.LocalDirectory;
         }
 
+        /// <summary>
+        /// Creates a public key for this endpoint.
+        /// </summary>
         private void GeneratePublicKey()
         {
             BigInteger[] key = localClient.CreatePublicKey();
