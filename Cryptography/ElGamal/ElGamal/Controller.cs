@@ -9,6 +9,7 @@ namespace ElGamal
 {
     public class Controller
     {
+        //variable declaration
         Form1 mainWindow;
         FakeTCPClient localHost;
         ElGamalClient localClient;

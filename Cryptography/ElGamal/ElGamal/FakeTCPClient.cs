@@ -10,6 +10,7 @@ namespace ElGamal
 {
     public class FakeTCPClient
     {
+        //variable declaration
         private string ip = "10.0.0.";
         private string currentDirectory = string.Empty;
 

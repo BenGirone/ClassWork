@@ -13,7 +13,11 @@ namespace ElGamal
             InitializeComponent();
         }
 
-        //https://stackoverflow.com/questions/10775367/cross-thread-operation-not-valid-control-textbox1-accessed-from-a-thread-othe?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+        /// <summary>
+        /// Writes to the console window.
+        /// </summary>
+        /// <param name="s">A string of text to be written to the console window</param>
+        /// <credit>https://stackoverflow.com/questions/10775367/</credit>
         public void ConsoleWrite(string s)
         {
             // InvokeRequired required compares the thread ID of the
@@ -30,12 +34,22 @@ namespace ElGamal
             }
         }
 
+        /// <summary>
+        /// Prompts the program controller to send the message to the provided IP.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void sendMessage_Click(object sender, EventArgs e)
         {
             Program.controller.SendMessage(plainText.Text, remoteIP.Text);
         }
 
-        //https://stackoverflow.com/questions/16136383/
+        /// <summary>
+        /// Opens a message and prompts the program controller to process it.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <credit>https://stackoverflow.com/questions/16136383/</credit>
         private void readMessage_Click(object sender, EventArgs e)
         {
             OpenFileDialog theDialog = new OpenFileDialog();
@@ -49,6 +63,10 @@ namespace ElGamal
             }
         }
 
+        /// <summary>
+        /// Writes a message to the main window.
+        /// </summary>
+        /// <param name="message"></param>
         internal void DisplayMessage(string message)
         {
             this.plainText.Text = message;
