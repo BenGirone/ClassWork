@@ -1,14 +1,11 @@
 sudo apt update
 sudo apt upgrade
+sudo apt install curl
 sudo apt-get install git
 sudo apt install git
 sudo apt install openjdk-8-jre-headless 
 sudo mkdir -p /usr/local/bin
-touch lein
-
-nano lein
-#insert text from "https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein"
-
+curl -o lein https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
 sudo mv lein* /usr/local/bin/lein
 sudo chmod a+x /usr/local/bin/lein
 export PATH=$PATH:/usr/local/bin
@@ -16,11 +13,12 @@ wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add
 sudo apt-get install apt-transport-https
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 sudo apt-get update
-
 sudo apt-get install sublime-text
 #install package control
 #install sublimeREPL
 #make python3 build system and repl "https://coderwall.com/p/nhq2gg/setting-up-sublimerepl-with-python3"
-
 sudo apt-get install python3-pip
 sudo apt-get install python3-tk 
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get install -y nodejs
+sudo apt-get install -y build-essential
