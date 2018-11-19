@@ -1,0 +1,5 @@
+Use ./install.sh to install good_echo into the command line
+Use ./uninstall.sh to remove it
+
+You may need to run:
+     chmod a+x install.sh uninstall.sh

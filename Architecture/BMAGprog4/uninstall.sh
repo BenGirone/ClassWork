@@ -1,0 +1,1 @@
+(sudo rm /bin/good_echo || echo "File already removed or Uninstall failed.") || echo "Uninstalled good_echo"
